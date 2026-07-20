@@ -16,4 +16,12 @@
 ## voir le solde : 
     - calul de solde dans table : transactions, et solde_user
     - 
-## 
+ETU003896
+
+## opperateur
+    -voir la list des user avec sold
+    -formualire
+        -prefixe
+        -operation
+        -borne
+        - gain de l'operateur
