@@ -90,48 +90,95 @@ FROM transactions t
 WHERE t.id_type = 3 AND t.id2 IS NOT NULL;
 
 -- =========================================================
--- INSERTIONS DE DONNEES
+-- DONNÉES DE TEST : Mobile Money (SQLite3)
 -- =========================================================
 
--- Types de transaction : 1=retrait, 2=depot, 3=transfert
-INSERT INTO type_transaction (nom) VALUES ('retrait');
-INSERT INTO type_transaction (nom) VALUES ('depot');
-INSERT INTO type_transaction (nom) VALUES ('transfert');
+-- Désactiver temporairement les clés étrangères pour éviter les conflits d'insertion si nécessaire
+PRAGMA foreign_keys = OFF;
 
--- Prefixes valables de l'operateur
-INSERT INTO prefixe (nom) VALUES ('033');
-INSERT INTO prefixe (nom) VALUES ('037');
+-- Nettoyage préalable des tables (Tronquer/Vider sans supprimer les tables)
+DELETE FROM transactions;
+DELETE FROM solde_user;
+DELETE FROM Montant_frai;
+DELETE FROM prefixe;
+DELETE FROM operateur;
+DELETE FROM type_transaction;
+DELETE FROM user;
 
--- Bareme de frais pour le RETRAIT (idtype_transaction = 1)
-INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (100, 1000, 50, 1);
-INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (1001, 5000, 50, 1);
-INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (5001, 10000, 100, 1);
-INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (10001, 25000, 200, 1);
-INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (25001, 50000, 400, 1);
-INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (50001, 100000, 800, 1);
-INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (100001, 250000, 1500, 1);
-INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (250001, 500000, 1500, 1);
-INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (500001, 1000000, 2500, 1);
-INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (1000001, 2000000, 3000, 1);
+-- Réinitialisation des compteurs d'auto-incrément
+DELETE FROM sqlite_sequence WHERE name IN ('user', 'type_transaction', 'Montant_frai', 'transactions', 'prefixe', 'operateur');
 
--- Bareme de frais pour le TRANSFERT (idtype_transaction = 3)
--- (meme bareme que le retrait, a ajuster cote operateur si besoin)
-INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (100, 1000, 50, 3);
-INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (1001, 5000, 50, 3);
-INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (5001, 10000, 100, 3);
-INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (10001, 25000, 200, 3);
-INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (25001, 50000, 400, 3);
-INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (50001, 100000, 800, 3);
-INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (100001, 250000, 1500, 3);
-INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (250001, 500000, 1500, 3);
-INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (500001, 1000000, 2500, 3);
-INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (1000001, 2000000, 3000, 3);
-
--- Activation des clés étrangères (bonne pratique)
 PRAGMA foreign_keys = ON;
 
--- Insertions dans la table user
-INSERT INTO user (prefixe, sufixe, nom) VALUES ('034', '1234567', 'Sariaka');
-INSERT INTO user (prefixe, sufixe, nom) VALUES ('032', '7654321', 'Rindra');
-INSERT INTO user (prefixe, sufixe, nom) VALUES ('038', '9999999', 'Bako');
-INSERT INTO user (prefixe, sufixe, nom) VALUES ('033', '4445566', 'Jean');
+-- ---------------------------------------------------------
+-- 1. Insertion des Types de Transaction
+-- ---------------------------------------------------------
+-- (Important : id=1 pour Retrait, id=2 pour Dépôt, id=3 pour Transfert selon ta vue)
+INSERT INTO type_transaction (id, nom) VALUES (1, 'Retrait');
+INSERT INTO type_transaction (id, nom) VALUES (2, 'Depot');
+INSERT INTO type_transaction (id, nom) VALUES (3, 'Transfert');
+
+-- ---------------------------------------------------------
+-- 2. Insertion des Opérateurs
+-- ---------------------------------------------------------
+INSERT INTO operateur (id_operateur, nom, prefixe) VALUES (1, 'Telma', '034');
+INSERT INTO operateur (id_operateur, nom, prefixe) VALUES (2, 'Orange', '032');
+INSERT INTO operateur (id_operateur, nom, prefixe) VALUES (3, 'Airtel', '033');
+
+-- ---------------------------------------------------------
+-- 3. Insertion des Préfixes de validation
+-- ---------------------------------------------------------
+INSERT INTO prefixe (id_prefixe, nom, id_operateur) VALUES (1, '034', 1);
+INSERT INTO prefixe (id_prefixe, nom, id_operateur) VALUES (2, '032', 2);
+INSERT INTO prefixe (id_prefixe, nom, id_operateur) VALUES (3, '033', 3);
+INSERT INTO prefixe (id_prefixe, nom, id_operateur) VALUES (4, '038', 1); -- Préfixe d'un sous-réseau ou test
+
+-- ---------------------------------------------------------
+-- 4. Insertion du Barème des Frais (Montant_frai)
+-- ---------------------------------------------------------
+-- Pour les Retraits (idtype_transaction = 1)
+INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (0.0, 5000.0, 200.0, 1);
+INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (5001.0, 20000.0, 500.0, 1);
+INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (20001.0, 100000.0, 1500.0, 1);
+INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (100001.0, 500000.0, 3000.0, 1);
+
+-- Pour les Transferts (idtype_transaction = 3)
+INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (0.0, 10000.0, 100.0, 3);
+INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (10001.0, 50000.0, 300.0, 3);
+INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (50001.0, 500000.0, 1000.0, 3);
+
+-- ---------------------------------------------------------
+-- 5. Insertion des Utilisateurs (Comptes de test)
+-- ---------------------------------------------------------
+-- Note : les numéros complets sont formés par ton code via préfixe + suffixe
+INSERT INTO user (id_user, prefixe, sufixe, nom) VALUES (1, '034', '1234567', 'Finaritra');
+INSERT INTO user (id_user, prefixe, sufixe, nom) VALUES (2, '032', '7654321', 'Rindra');
+INSERT INTO user (id_user, prefixe, sufixe, nom) VALUES (3, '033', '4567890', 'Rakoto');
+
+-- ---------------------------------------------------------
+-- 6. Insertion des Transactions (Historique de test)
+-- ---------------------------------------------------------
+
+-- Transaction A : Finaritra (id=1) fait un DÉPÔT de 50 000 Ariary (Pas de frais sur les dépôts)
+INSERT INTO transactions (id_transaction, id_type, montant, date, id1, id2, idMontant_frai) 
+VALUES (1, 2, 50000.0, '2026-07-20 09:00:00', 1, NULL, NULL);
+
+-- Transaction B : Rindra (id=2) fait un DÉPÔT de 100 000 Ariary
+INSERT INTO transactions (id_transaction, id_type, montant, date, id1, id2, idMontant_frai) 
+VALUES (2, 2, 100000.0, '2026-07-20 09:15:00', 2, NULL, NULL);
+
+-- Transaction C : Finaritra (id=1) TRANSFERT 20 000 Ariary à Rindra (id=2)
+-- Frais associés : tranche 10001 à 50000 pour transfert -> idMontant_frai = 6 (300 Ar de frais)
+INSERT INTO transactions (id_transaction, id_type, montant, date, id1, id2, idMontant_frai) 
+VALUES (3, 3, 20000.0, '2026-07-20 10:30:00', 1, 2, 6);
+
+-- Transaction D : Rindra (id=2) fait un RETRAIT de 15 000 Ariary en agence
+-- Frais associés : tranche 5001 à 20000 pour retrait -> idMontant_frai = 2 (500 Ar de frais)
+INSERT INTO transactions (id_transaction, id_type, montant, date, id1, id2, idMontant_frai) 
+VALUES (4, 1, 15000.0, '2026-07-20 11:00:00', 2, NULL, 2);
+
+-- ---------------------------------------------------------
+-- 7. Table Solde Historique (Optionnel, au cas où ton modèle l'exige)
+-- ---------------------------------------------------------
+INSERT INTO solde_user (id_user, solde, date) VALUES (1, 0.0, '2026-07-20 08:00:00');
+INSERT INTO solde_user (id_user, solde, date) VALUES (2, 0.0, '2026-07-20 08:00:00');

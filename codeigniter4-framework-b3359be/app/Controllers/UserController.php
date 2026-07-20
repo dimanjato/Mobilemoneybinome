@@ -42,52 +42,35 @@ class UserController extends BaseController
             return redirect()->to('/login');
         }
 
-        // Recupere le compte existant, ou le cree automatiquement s'il n'existe pas
-        $user = $model->getOrCreateUserByPhoneNumber($cleanNumber);
-        // 1. EXTRACTION ET VÉRIFICATION DU PRÉFIXE
-        // On prend les 3 premiers caractères du numéro (ex: "034" depuis "0341234567")
-        $prefixeSaisi = substr($numeroSaisi, 0, 3);
+        // 1. EXTRACTION ET VÉRIFICATION DU PRÉFIXE (ex: "034", "032")
+        $prefixeSaisi = substr($cleanNumber, 0, 3);
 
         // On cherche si ce préfixe existe dans la table 'prefixe'
         $prefixeExiste = $prefixeModel->where('nom', $prefixeSaisi)->first();
 
         if (!$prefixeExiste) {
-            // Si le préfixe n'est pas trouvé dans la base
             $session->setFlashdata('error', "Le préfixe '{$prefixeSaisi}' n'est pas pris en charge par notre réseau Mobile Money.");
-            return redirect()->to('/Connexion');
+            return redirect()->to('/login');
         }
 
-        // 1. EXTRACTION ET VÉRIFICATION DU PRÉFIXE
-        // On prend les 3 premiers caractères du numéro (ex: "034" depuis "0341234567")
-        $prefixeSaisi = substr($numeroSaisi, 0, 3);
-
-        // On cherche si ce préfixe existe dans la table 'prefixe'
-        $prefixeExiste = $prefixeModel->where('nom', $prefixeSaisi)->first();
-
-        if (!$prefixeExiste) {
-            // Si le préfixe n'est pas trouvé dans la base
-            $session->setFlashdata('error', "Le préfixe '{$prefixeSaisi}' n'est pas pris en charge par notre réseau Mobile Money.");
-            return redirect()->to('/Connexion');
-        }
-
-        // 2. VÉRIFICATION DE L'UTILISATEUR
-        // Si le préfixe est valide, on cherche l'utilisateur complet
-        $user = $userModel->getUserByPhoneNumber($numeroSaisi);
+        // 2. RÉCUPÉRATION OU CRÉATION AUTOMATIQUE DU COMPTE
+        // Utilisation de $userModel (et non $model) pour corriger l'erreur critique
+        $user = $userModel->getOrCreateUserByPhoneNumber($cleanNumber);
 
         if ($user) {
             // Connexion reussie : on stocke les infos de l'utilisateur dans la session
             $session->set([
                 'id_user'    => $user['id_user'],
-                'nom'        => $user['nom'],
+                'nom'        => $user['nom'] ?? 'Client', // Sécurité au cas où le nom est vide à la création
                 'isLoggedIn' => true,
             ]);
 
-            // Redirection vers le tableau de bord de l'application Mobile Money
+            // Redirection vers le tableau de bord
             return redirect()->to('/client/voirsolde');
         }
 
-        // Echec (numero invalide malgre tout)
-        $session->setFlashdata('error', 'Numero de telephone invalide.');
+        // Echec de sécurité
+        $session->setFlashdata('error', 'Impossible de charger ou de créer votre compte.');
         return redirect()->to('/login');
     }
 

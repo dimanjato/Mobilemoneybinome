@@ -32,6 +32,10 @@
         </div>
         <button type="submit" class="mm-btn">Se connecter</button>
     </form>
+    <!-- lien vers operateur -->
+    <a href="<?= base_url('operateur/config') ?>" class="btn-retro" style="text-decoration: none; display: inline-block; width: auto; padding: 5px 15px;">
+         Ouvrir le Panneau Opérateur
+    </a>
 </div>
 </body>
 </html>
