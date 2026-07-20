@@ -26,6 +26,9 @@
 
 <div class="container">
     <h1>Panneau de Configuration Mobile Money</h1>
+    <!-- lien vers autre_operateur.php -->
+    <a>
+    </a>
     <!--gain operateur  -->
     <div class="card-full" style="margin-top: 30px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
         <h3 style="margin-top: 0; color: #2c3e50; border-bottom: 2px solid #ecf0f1; padding-bottom: 8px;">

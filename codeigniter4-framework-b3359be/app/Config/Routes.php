@@ -28,3 +28,7 @@ $routes->get('operateur/config', 'OperateurController::index');
 $routes->post('operateur/addPrefixe', 'OperateurController::addPrefixe');
 $routes->post('operateur/addOperation', 'OperateurController::addOperation');
 $routes->post('operateur/addFrai', 'OperateurController::addFrai');
+
+$routes->get('operateur/autre', 'OperateurController::autreOperateurIndex');
+$routes->post('operateur/add-tiers', 'OperateurController::addOperateurTiers');
+$routes->get('operateur/situation', 'OperateurController::situationMontantsAEnvoyer');

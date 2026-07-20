@@ -164,7 +164,7 @@ class OperateurController extends BaseController
                           ')
                           ->join('user u', 't.id2 = u.id_user')
                           ->join('operateur o', 'u.prefixe = o.prefixe')
-                          ->leftJoin('Montant_frai mf', 't.idMontant_frai = mf.idMontantFrai')
+                          ->Join('Montant_frai mf', 't.idMontant_frai = mf.idMontantFrai')
                           ->where('t.id_type', 3)
                           ->whereNotIn('o.prefixe', ['033', '037']);
 
@@ -176,7 +176,7 @@ class OperateurController extends BaseController
             $histBuilder->where('u.prefixe', $filtrePrefixe);
         }
         if (!empty($filtreDate)) {
-            $histBuilder->where('DATE(t.date)', $filtreDate);
+            $histBuilder->like('DATE(t.date)', $filtreDate);
         }
 
         $data['historique'] = $histBuilder->orderBy('t.date', 'DESC')->get()->getResultArray();
@@ -192,7 +192,7 @@ class OperateurController extends BaseController
             'date'      => $filtreDate
         ];
 
-        return view('operateur/autre_operateur_view', $data);
+        return view('operateur/autre_operateur', $data);
     }
 
     /**
