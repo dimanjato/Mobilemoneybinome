@@ -20,3 +20,11 @@ $routes->get('/login', 'UserController::index');
 $routes->post('/login', 'UserController::login');
 $routes->get('/logout', 'UserController::logout');
 
+$routes->get('prefixe', 'PrefixeController::index');
+$routes->post('prefixe/store', 'PrefixeController::store');
+
+// Routes pour les opérations 
+$routes->get('operateur/config', 'OperateurController::index');
+$routes->post('operateur/addPrefixe', 'OperateurController::addPrefixe');
+$routes->post('operateur/addOperation', 'OperateurController::addOperation');
+$routes->post('operateur/addFrai', 'OperateurController::addFrai');

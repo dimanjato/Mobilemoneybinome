@@ -60,3 +60,12 @@
     - creer partials/nav.php (menu commun Solde/Depot/Retrait/Transfert/Historique/Deconnexion) : ok
     - ajout routes /client/depot, /client/retrait, /client/transfert, /client/historique (protegees par le filtre auth) : ok
 
+ETU003896
+
+## opperateur
+    -voir la list des user avec sold
+    -formualire
+        -prefixe
+        -operation
+        -borne
+        - gain de l'operateur
