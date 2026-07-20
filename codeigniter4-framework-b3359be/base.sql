@@ -5,7 +5,8 @@
 CREATE TABLE IF NOT EXISTS operateur (
     id_operateur INTEGER PRIMARY KEY AUTOINCREMENT,
     nom TEXT NOT NULL,
-    prefixe TEXT NOT NULL
+    prefixe TEXT NOT NULL,
+    commition REAL DEFAULT 0.0
 );
 
 -- 1. Table : user (comptes clients, creation automatique a la 1ere connexion)
@@ -69,49 +70,25 @@ CREATE TABLE IF NOT EXISTS prefixe (
 
 
 -- =========================================================
--- VUE : view_calcul_releve
--- Calcule l'impact de chaque transaction sur le solde de chaque
--- utilisateur concerne (utilisee par SoldeModel::getSoldeAu)
---   - depot   (id_type=2) : +montant                 pour id1
---   - retrait (id_type=1) : -(montant + frai)         pour id1
---   - transfert (id_type=3) : -(montant + frai) pour id1, +montant pour id2
--- =========================================================
-DROP VIEW IF EXISTS view_calcul_releve;
-CREATE VIEW view_calcul_releve AS
-SELECT
-    t.id1 AS id_utilisateur,
-    t.date AS date,
-    CASE
-        WHEN t.id_type = 2 THEN t.montant
-        WHEN t.id_type = 1 THEN -(t.montant + COALESCE(mf.frai, 0))
-        WHEN t.id_type = 3 THEN -(t.montant + COALESCE(mf.frai, 0))
-        ELSE 0
-    END AS impact_solde
-FROM transactions t
-LEFT JOIN Montant_frai mf ON t.idMontant_frai = mf.idMontantFrai
-WHERE t.id1 IS NOT NULL
-UNION ALL
-SELECT
-    t.id2 AS id_utilisateur,
-    t.date AS date,
-    t.montant AS impact_solde
-FROM transactions t
-WHERE t.id_type = 3 AND t.id2 IS NOT NULL;
-
--- =========================================================
 -- INSERTIONS DE DONNEES
 -- =========================================================
 
--- Types de transaction : 1=retrait, 2=depot, 3=transfert
+-- 1. Types de transaction : 1=retrait, 2=depot, 3=transfert
 INSERT INTO type_transaction (nom) VALUES ('retrait');
 INSERT INTO type_transaction (nom) VALUES ('depot');
 INSERT INTO type_transaction (nom) VALUES ('transfert');
 
--- Prefixes valables de l'operateur
-INSERT INTO prefixe (nom) VALUES ('033');
-INSERT INTO prefixe (nom) VALUES ('037');
+-- 2. Insertion des opérateurs (Important pour avoir un id_operateur valide)
+-- Remarque : j'ai gardé ton orthographe "commition" pour que ça colle à ta table !
+INSERT INTO operateur (id_operateur, nom, prefixe, commition) VALUES (1, 'MonOperateur', '033', 0.0);
+INSERT INTO operateur (id_operateur, nom, prefixe, commition) VALUES (2, 'AutreOperateur', '032', 2.5);
 
--- Bareme de frais pour le RETRAIT (idtype_transaction = 1)
+-- 3. Préfixes valables (En fournissant obligatoirement l'id_operateur)
+INSERT INTO prefixe (nom, id_operateur) VALUES ('033', 1); -- Lié à MonOperateur
+INSERT INTO prefixe (nom, id_operateur) VALUES ('037', 1); -- Lié à MonOperateur
+INSERT INTO prefixe (nom, id_operateur) VALUES ('032', 2); -- Lié à AutreOperateur
+
+-- 4. Bareme de frais pour le RETRAIT (idtype_transaction = 1)
 INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (100, 1000, 50, 1);
 INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (1001, 5000, 50, 1);
 INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (5001, 10000, 100, 1);
@@ -123,8 +100,7 @@ INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (
 INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (500001, 1000000, 2500, 1);
 INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (1000001, 2000000, 3000, 1);
 
--- Bareme de frais pour le TRANSFERT (idtype_transaction = 3)
--- (meme bareme que le retrait, a ajuster cote operateur si besoin)
+-- 5. Bareme de frais pour le TRANSFERT (idtype_transaction = 3)
 INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (100, 1000, 50, 3);
 INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (1001, 5000, 50, 3);
 INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (5001, 10000, 100, 3);

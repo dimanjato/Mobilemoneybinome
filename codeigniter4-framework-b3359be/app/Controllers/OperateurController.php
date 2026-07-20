@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\PrefixeModel;
 use App\Models\TypeTransactionModel;
 use App\Models\MontantFraiModel;
+use App\Models\OperateurModel;
 
 class OperateurController extends BaseController
 {
@@ -119,4 +120,152 @@ class OperateurController extends BaseController
     // 3. Retourne le résultat à ta vue globale ou une nouvelle vue
     return view('operateur/admin_config_view', $data); 
 }
+    /**
+     * 5. Affichage de la page des autres opérateurs (Gains et historique filtré)
+     */
+    public function autreOperateurIndex()
+    {
+        $db = \Config\Database::connect();
+
+        // Récupération des filtres depuis l'URL (GET)
+        $filtreOperateur = $this->request->getGet('operateur');
+        $filtrePrefixe   = $this->request->getGet('prefixe');
+        $filtreDate      = $this->request->getGet('date');
+
+        // A. Liste des autres opérateurs (exclut le tien, par exemple 033 et 037)
+        $data['autresOperateurs'] = $db->table('operateur')
+                                       ->whereNotIn('prefixe', ['033', '037'])
+                                       ->get()
+                                       ->getResultArray();
+
+        // B. Somme des gains via les commissions des autres opérateurs
+        // Formule : montant_transaction * (commition / 100)
+        $gainQuery = $db->table('transactions t')
+                        ->select('SUM(t.montant * (o.commition / 100)) as total_gains')
+                        ->join('user u', 't.id2 = u.id_user') // Le récepteur du transfert
+                        ->join('operateur o', 'u.prefixe = o.prefixe')
+                        ->where('t.id_type', 3) // Uniquement les transferts
+                        ->whereNotIn('o.prefixe', ['033', '037'])
+                        ->get()
+                        ->getRowArray();
+        
+        $data['totalGains'] = $gainQuery['total_gains'] ?? 0.0;
+
+        // C. Construction de l'historique des montants envoyés aux autres opérateurs avec filtres
+        $histBuilder = $db->table('transactions t')
+                          ->select('
+                              (u.prefixe || u.sufixe) as numero_destinataire,
+                              t.montant as montant,
+                              o.commition as pourcentage,
+                              (t.montant * (o.commition / 100)) as gain_commission,
+                              COALESCE(mf.frai, 0) as frais,
+                              t.date as date_transaction,
+                              o.nom as operateur_nom
+                          ')
+                          ->join('user u', 't.id2 = u.id_user')
+                          ->join('operateur o', 'u.prefixe = o.prefixe')
+                          ->leftJoin('Montant_frai mf', 't.idMontant_frai = mf.idMontantFrai')
+                          ->where('t.id_type', 3)
+                          ->whereNotIn('o.prefixe', ['033', '037']);
+
+        // Application dynamique des filtres de recherche
+        if (!empty($filtreOperateur)) {
+            $histBuilder->where('o.id_operateur', $filtreOperateur);
+        }
+        if (!empty($filtrePrefixe)) {
+            $histBuilder->where('u.prefixe', $filtrePrefixe);
+        }
+        if (!empty($filtreDate)) {
+            $histBuilder->where('DATE(t.date)', $filtreDate);
+        }
+
+        $data['historique'] = $histBuilder->orderBy('t.date', 'DESC')->get()->getResultArray();
+        
+        // Liste complète pour remplir les listes déroulantes (Select) des filtres
+        $data['listeOperateursFiltrable'] = $db->table('operateur')->get()->getResultArray();
+        $data['listePrefixesFiltrable']   = $db->table('prefixe')->select('nom')->distinct()->get()->getResultArray();
+        
+        // Mémorisation des filtres pour les réafficher dans les champs
+        $data['filtres'] = [
+            'operateur' => $filtreOperateur,
+            'prefixe'   => $filtrePrefixe,
+            'date'      => $filtreDate
+        ];
+
+        return view('operateur/autre_operateur_view', $data);
+    }
+
+    /**
+     * 6. Traitement du formulaire d'ajout d'un nouvel opérateur (avec plusieurs préfixes possibles)
+     */
+    public function addOperateurTiers()
+    {
+        $db           = \Config\Database::connect();
+        $prefixeModel = new PrefixeModel();
+
+        $nom      = $this->request->getPost('nom');
+        $prct     = $this->request->getPost('prct');
+        $prefixes = $this->request->getPost('prefixe'); // Reçoit une chaîne ex: "032,034"
+
+        if (empty($nom) || empty($prefixes)) {
+            return redirect()->back()->with('error', 'Le nom et au moins un préfixe sont obligatoires.');
+        }
+
+        // Découpage des préfixes saisis par virgule
+        $tabPrefixes = explode(',', $prefixes);
+        $prefixePrincipal = trim($tabPrefixes[0]);
+
+        // A. Insertion dans la table operateur (On utilise 'commition' pour correspondre à ton schéma)
+        $dataOperateur = [
+            'nom'       => $nom,
+            'prefixe'   => $prefixePrincipal,
+            'commition' => floatval($prct ?? 0.0)
+        ];
+        
+        $db->table('operateur')->insert($dataOperateur);
+        $idOperateur = $db->insertID();
+
+        // B. Insertion de chaque préfixe dans la table prefixe associée
+        if ($idOperateur) {
+            foreach ($tabPrefixes as $pref) {
+                $cleanPref = trim($pref);
+                if (!empty($cleanPref)) {
+                    $prefixeModel->save([
+                        'nom'          => $cleanPref,
+                        'id_operateur' => $idOperateur
+                    ]);
+                }
+            }
+            return redirect()->to('/operateur/autre')->with('success', 'Nouvel opérateur et ses préfixes configurés !');
+        }
+
+        return redirect()->back()->with('error', 'Une erreur est survenue.');
+    }
+
+    /**
+     * 7. Page "Situation des montants globaux à envoyer à chaque opérateur"
+     */
+    public function situationMontantsAEnvoyer()
+    {
+        $db = \Config\Database::connect();
+
+        // Somme brute des transferts groupée par opérateur récepteur
+        $query = $db->query("
+            SELECT 
+                o.nom as operateur_nom,
+                o.prefixe as operateur_prefixe,
+                COUNT(t.id_transaction) as total_transferts,
+                COALESCE(SUM(t.montant), 0) as montant_global_brut
+            FROM transactions t
+            JOIN user u ON t.id2 = u.id_user
+            JOIN operateur o ON u.prefixe = o.prefixe
+            WHERE t.id_type = 3 -- Uniquement transferts
+            AND o.prefixe NOT IN ('033', '037') -- Vers les autres opérateurs uniquement
+            GROUP BY o.id_operateur
+        ");
+
+        $data['situation_flux'] = $query->getResultArray();
+
+        return view('operateur/situation_flux_view', $data);
+    }
 }
