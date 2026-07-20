@@ -5,6 +5,14 @@
     type_trasaction(id,nom)
     - transaction (id_transaction, id_type, montant, date, id1,id2, idMontant_frai)
     - Montant_frai (idMontantFrai, Montant1, Montant2, frai)
+## Connexion base :
 ## mise en place de donnee test :
-    
+## Connexion de clients :
+    - validation :
+    - recherche de compte si existe :
+    - mampiditra session client :
+## voir le solde : 
+    - calul de solde dans table : transactions, et solde_user
+    - 
 ## 
+
