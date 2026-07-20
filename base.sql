@@ -5,6 +5,13 @@ sqlite3 mobilemoney.db
 -- =========================================================
 
 -- 1. Table : user (comptes clients, creation automatique a la 1ere connexion)
+CREATE TABLE IF NOT EXISTS operateur (
+    id_operateur INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL,
+    prefixe TEXT NOT NULL,
+    commition REAL DEFAULT 0.0
+);
+
 CREATE TABLE IF NOT EXISTS user (
     id_user INTEGER PRIMARY KEY AUTOINCREMENT,
     sufixe TEXT,
@@ -182,3 +189,5 @@ VALUES (4, 1, 15000.0, '2026-07-20 11:00:00', 2, NULL, 2);
 -- ---------------------------------------------------------
 INSERT INTO solde_user (id_user, solde, date) VALUES (1, 0.0, '2026-07-20 08:00:00');
 INSERT INTO solde_user (id_user, solde, date) VALUES (2, 0.0, '2026-07-20 08:00:00');
+
+INSERT INTO user (prefixe, sufixe, nom) VALUES ('033', '12345678', 'Rakoto Jean');

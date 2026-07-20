@@ -18,6 +18,7 @@ class UserController extends BaseController
     /**
      * Traite la tentative de connexion (avec inscription automatique)
      */
+    
     public function login()
     {
         $session      = session();
@@ -40,32 +41,19 @@ class UserController extends BaseController
             return redirect()->to('/login');
         }
 
-<<<<<<< HEAD
         // 1. EXTRACTION ET VÉRIFICATION DU PRÉFIXE (ex: "034", "032")
         $prefixeSaisi = substr($cleanNumber, 0, 3);
 
         // On cherche si ce préfixe existe dans la table 'prefixe'
-=======
-        // 1. EXTRACTION ET VÉRIFICATION DU PRÉFIXE (ex: 034, 032, etc.)
-        $prefixeSaisi = substr($cleanNumber, 0, 3);
->>>>>>> c29938e (ok)
         $prefixeExiste = $prefixeModel->where('nom', $prefixeSaisi)->first();
 
         if (!$prefixeExiste) {
             $session->setFlashdata('error', "Le préfixe '{$prefixeSaisi}' n'est pas pris en charge par notre réseau Mobile Money.");
-<<<<<<< HEAD
             return redirect()->to('/login');
         }
 
         // 2. RÉCUPÉRATION OU CRÉATION AUTOMATIQUE DU COMPTE
         // Utilisation de $userModel (et non $model) pour corriger l'erreur critique
-=======
-            return redirect()->to('/login'); // Redirection vers la bonne route
-        }
-
-        // 2. RÉCUPÉRATION OU CRÉATION DU COMPTE CLIENT
-        // Correction ici : on utilise le bon modèle $userModel et la variable nettoyée
->>>>>>> c29938e (ok)
         $user = $userModel->getOrCreateUserByPhoneNumber($cleanNumber);
 
         if ($user) {
@@ -76,21 +64,12 @@ class UserController extends BaseController
                 'isLoggedIn' => true,
             ]);
 
-<<<<<<< HEAD
             // Redirection vers le tableau de bord
             return redirect()->to('/client/voirsolde');
         }
 
         // Echec de sécurité
         $session->setFlashdata('error', 'Impossible de charger ou de créer votre compte.');
-=======
-            // Redirection vers le solde du client
-            return redirect()->to('/client/voirsolde');
-        }
-
-        // Échec de sécurité générique
-        $session->setFlashdata('error', 'Impossible de valider votre numéro de téléphone.');
->>>>>>> c29938e (ok)
         return redirect()->to('/login');
     }
 
