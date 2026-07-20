@@ -191,3 +191,6 @@ INSERT INTO solde_user (id_user, solde, date) VALUES (1, 0.0, '2026-07-20 08:00:
 INSERT INTO solde_user (id_user, solde, date) VALUES (2, 0.0, '2026-07-20 08:00:00');
 
 INSERT INTO user (prefixe, sufixe, nom) VALUES ('033', '12345678', 'Rakoto Jean');
+
+
+
