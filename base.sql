@@ -19,16 +19,8 @@ CREATE TABLE IF NOT EXISTS Montant_frai (
     idMontantFrai INTEGER PRIMARY KEY AUTOINCREMENT,
     Montant1 REAL NOT NULL,
     Montant2 REAL NOT NULL,
-    frai REAL NOT NULL
-);
-
--- 4. Table : solde_user
-CREATE TABLE IF NOT EXISTS solde_user (
-    id_user INTEGER,
-    solde REAL NOT NULL DEFAULT 0.0,
-    date TEXT NOT NULL DEFAULT (DATETIME('now')),
-    PRIMARY KEY (id_user, date), -- Clé primaire composite pour suivre l'évolution du solde dans le temps
-    FOREIGN KEY (id_user) REFERENCES user(id_user) ON DELETE CASCADE
+    frai REAL NOT NULL,
+    idtype_transaction INTEGER NOT NULL
 );
 
 -- 5. Table : transaction
@@ -56,18 +48,30 @@ INSERT INTO type_transaction (nom) VALUES ('retrait');
 INSERT INTO type_transaction (nom) VALUES ('depot');
 INSERT INTO type_transaction (nom) VALUES ('transfert');
 
--- 2. Insertions dans la table Montant_frai (basées sur l'image fournie)
--- Colonnes : Montant1 (Borne minimale), Montant2 (Borne maximale), frai (Montant du frais)
-INSERT INTO Montant_frai (Montant1, Montant2, frai) VALUES (100, 1000, 50);
-INSERT INTO Montant_frai (Montant1, Montant2, frai) VALUES (1001, 5000, 50);
-INSERT INTO Montant_frai (Montant1, Montant2, frai) VALUES (5001, 10000, 100);
-INSERT INTO Montant_frai (Montant1, Montant2, frai) VALUES (10001, 25000, 200);
-INSERT INTO Montant_frai (Montant1, Montant2, frai) VALUES (25001, 50000, 400);
-INSERT INTO Montant_frai (Montant1, Montant2, frai) VALUES (50001, 100000, 800);
-INSERT INTO Montant_frai (Montant1, Montant2, frai) VALUES (100001, 250000, 1500);
-INSERT INTO Montant_frai (Montant1, Montant2, frai) VALUES (25001, 500000, 1500);
-INSERT INTO Montant_frai (Montant1, Montant2, frai) VALUES (500001, 1000000, 2500);
-INSERT INTO Montant_frai (Montant1, Montant2, frai) VALUES (1000001, 2000000, 3000);
+-- 1. Insertions pour les FRAIS DE RETRAIT (idtype_transaction = 1)
+INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES 
+(100, 1000, 50, 1),
+(1001, 5000, 50, 1),
+(5001, 10000, 100, 1),
+(10001, 25000, 200, 1),
+(25001, 50000, 400, 1),
+(50001, 100000, 800, 1),
+(100001, 250000, 1500, 1),
+(250001, 500000, 1500, 1),
+(500001, 1000000, 2500, 1),
+(1000001, 2000000, 3000, 1);
 
+-- 2. Insertions pour les FRAIS DE TRANSFERT (idtype_transaction = 3)
+INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES 
+(100, 1000, 50, 3),
+(1001, 5000, 50, 3),
+(5001, 10000, 100, 3),
+(10001, 25000, 200, 3),
+(25001, 50000, 400, 3),
+(50001, 100000, 800, 3),
+(100001, 250000, 1500, 3),
+(250001, 500000, 1500, 3),
+(500001, 1000000, 2500, 3),
+(1000001, 2000000, 3000, 3);
 
 /*view qui va cacluler solde present dans transaction*/

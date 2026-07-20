@@ -19,6 +19,7 @@
 
 ## ETU004067 :
 ### Voir solde : 
-    - prise session :
-    - 
+    - creer AuthFIlters : ok
+    - creer controller SoldController : ok 
+    - creer le view qui va calculer le soldes actuelle : 
 
