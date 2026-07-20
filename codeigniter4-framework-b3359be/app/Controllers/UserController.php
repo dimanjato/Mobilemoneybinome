@@ -16,10 +16,7 @@ class UserController extends BaseController
     }
 
     /**
-     * Traite la tentative de connexion.
-     * Conformement au sujet : "Login automatique avec le numero de telephone,
-     * pas d'inscription au prealable" -> si le numero n'existe pas encore,
-     * un compte client est cree automatiquement.
+     * Traite la tentative de connexion (avec inscription automatique)
      */
     public function login()
     {
@@ -27,7 +24,7 @@ class UserController extends BaseController
         $userModel    = new UserModel();
         $prefixeModel = new PrefixeModel();
 
-        // Recuperation securisee du champ "phone" envoye en POST
+        // Récupération sécurisée du champ "phone" envoyé en POST
         $numeroSaisi = $this->request->getPost('phone');
 
         if (empty($numeroSaisi)) {
@@ -35,6 +32,7 @@ class UserController extends BaseController
             return redirect()->to('/login');
         }
 
+        // Nettoyage complet du numéro (uniquement des chiffres)
         $cleanNumber = preg_replace('/[^0-9]/', '', $numeroSaisi);
 
         if (strlen($cleanNumber) < 4) {
@@ -42,57 +40,38 @@ class UserController extends BaseController
             return redirect()->to('/login');
         }
 
-        // Recupere le compte existant, ou le cree automatiquement s'il n'existe pas
-        $user = $model->getOrCreateUserByPhoneNumber($cleanNumber);
-        // 1. EXTRACTION ET VÉRIFICATION DU PRÉFIXE
-        // On prend les 3 premiers caractères du numéro (ex: "034" depuis "0341234567")
-        $prefixeSaisi = substr($numeroSaisi, 0, 3);
-
-        // On cherche si ce préfixe existe dans la table 'prefixe'
+        // 1. EXTRACTION ET VÉRIFICATION DU PRÉFIXE (ex: 034, 032, etc.)
+        $prefixeSaisi = substr($cleanNumber, 0, 3);
         $prefixeExiste = $prefixeModel->where('nom', $prefixeSaisi)->first();
 
         if (!$prefixeExiste) {
-            // Si le préfixe n'est pas trouvé dans la base
             $session->setFlashdata('error', "Le préfixe '{$prefixeSaisi}' n'est pas pris en charge par notre réseau Mobile Money.");
-            return redirect()->to('/Connexion');
+            return redirect()->to('/login'); // Redirection vers la bonne route
         }
 
-        // 1. EXTRACTION ET VÉRIFICATION DU PRÉFIXE
-        // On prend les 3 premiers caractères du numéro (ex: "034" depuis "0341234567")
-        $prefixeSaisi = substr($numeroSaisi, 0, 3);
-
-        // On cherche si ce préfixe existe dans la table 'prefixe'
-        $prefixeExiste = $prefixeModel->where('nom', $prefixeSaisi)->first();
-
-        if (!$prefixeExiste) {
-            // Si le préfixe n'est pas trouvé dans la base
-            $session->setFlashdata('error', "Le préfixe '{$prefixeSaisi}' n'est pas pris en charge par notre réseau Mobile Money.");
-            return redirect()->to('/Connexion');
-        }
-
-        // 2. VÉRIFICATION DE L'UTILISATEUR
-        // Si le préfixe est valide, on cherche l'utilisateur complet
-        $user = $userModel->getUserByPhoneNumber($numeroSaisi);
+        // 2. RÉCUPÉRATION OU CRÉATION DU COMPTE CLIENT
+        // Correction ici : on utilise le bon modèle $userModel et la variable nettoyée
+        $user = $userModel->getOrCreateUserByPhoneNumber($cleanNumber);
 
         if ($user) {
-            // Connexion reussie : on stocke les infos de l'utilisateur dans la session
+            // Connexion réussie : stockage dans la session de l'application
             $session->set([
                 'id_user'    => $user['id_user'],
                 'nom'        => $user['nom'],
                 'isLoggedIn' => true,
             ]);
 
-            // Redirection vers le tableau de bord de l'application Mobile Money
+            // Redirection vers le solde du client
             return redirect()->to('/client/voirsolde');
         }
 
-        // Echec (numero invalide malgre tout)
-        $session->setFlashdata('error', 'Numero de telephone invalide.');
+        // Échec de sécurité générique
+        $session->setFlashdata('error', 'Impossible de valider votre numéro de téléphone.');
         return redirect()->to('/login');
     }
 
     /**
-     * Deconnexion
+     * Déconnexion
      */
     public function logout()
     {
