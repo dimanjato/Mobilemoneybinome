@@ -1,6 +1,12 @@
 -- =========================================================
 -- Mobile Money - Script de creation de la base (SQLite3)
 -- =========================================================
+-- table operateur
+CREATE TABLE IF NOT EXISTS operateur (
+    id_operateur INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL,
+    prefixe TEXT NOT NULL
+);
 
 -- 1. Table : user (comptes clients, creation automatique a la 1ere connexion)
 CREATE TABLE IF NOT EXISTS user (
@@ -54,8 +60,13 @@ CREATE TABLE IF NOT EXISTS transactions (
 -- 6. Table : prefixe (prefixes valables cote operateur, ex: 033, 037)
 CREATE TABLE IF NOT EXISTS prefixe (
     id_prefixe INTEGER PRIMARY KEY AUTOINCREMENT,
-    nom TEXT NOT NULL
+    nom TEXT NOT NULL,
+    id_operateur INTEGER NOT NULL,
+    FOREIGN KEY (id_operateur) REFERENCES operateur(id_operateur)
 );
+
+
+
 
 -- =========================================================
 -- VUE : view_calcul_releve
