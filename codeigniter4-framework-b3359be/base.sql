@@ -1,5 +1,3 @@
-sqlite3 mobilemoney.db
-
 -- =========================================================
 -- Mobile Money - Script de creation de la base (SQLite3)
 -- =========================================================
@@ -126,12 +124,3 @@ INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (
 INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (250001, 500000, 1500, 3);
 INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (500001, 1000000, 2500, 3);
 INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES (1000001, 2000000, 3000, 3);
-
--- Activation des clés étrangères (bonne pratique)
-PRAGMA foreign_keys = ON;
-
--- Insertions dans la table user
-INSERT INTO user (prefixe, sufixe, nom) VALUES ('034', '1234567', 'Sariaka');
-INSERT INTO user (prefixe, sufixe, nom) VALUES ('032', '7654321', 'Rindra');
-INSERT INTO user (prefixe, sufixe, nom) VALUES ('038', '9999999', 'Bako');
-INSERT INTO user (prefixe, sufixe, nom) VALUES ('033', '4445566', 'Jean');
