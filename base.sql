@@ -75,3 +75,34 @@ INSERT INTO Montant_frai (Montant1, Montant2, frai, idtype_transaction) VALUES
 (1000001, 2000000, 3000, 3);
 
 /*view qui va cacluler solde present dans transaction*/
+CREATE VIEW IF NOT EXISTS view_calcul_releve AS
+-- Cas où l'utilisateur est l'émetteur (id1)
+SELECT 
+    t.id_transaction,
+    t.date,
+    t.id_type,
+    t.id1 AS id_utilisateur,
+    CASE 
+        WHEN t.id_type = 1 THEN -(t.montant) - COALESCE(f.frai, 0) -- Retrait : somme = somme - montant - frais
+        WHEN t.id_type = 3 THEN -(t.montant) - COALESCE(f.frai, 0) -- Transfert émis : somme = somme - montant - frais
+        ELSE 0 
+    END AS impact_solde
+FROM transactions t
+LEFT JOIN Montant_frai f ON t.idMontant_frai = f.idMontantFrai
+WHERE t.id1 IS NOT NULL
+
+UNION ALL
+
+-- Cas où l'utilisateur est le récepteur (id2)
+SELECT 
+    t.id_transaction,
+    t.date,
+    t.id_type,
+    t.id2 AS id_utilisateur,
+    CASE 
+        WHEN t.id_type = 2 THEN t.montant -- Dépôt : somme = somme + montant
+        WHEN t.id_type = 3 THEN t.montant -- Transfert reçu (si id n'est pas id1) : somme = somme + montant
+        ELSE 0 
+    END AS impact_solde
+FROM transactions t
+WHERE t.id2 IS NOT NULL AND t.id_type IN (2, 3);
