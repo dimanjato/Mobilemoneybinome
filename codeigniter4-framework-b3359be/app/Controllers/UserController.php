@@ -16,10 +16,7 @@ class UserController extends BaseController
     }
 
     /**
-     * Traite la tentative de connexion.
-     * Conformement au sujet : "Login automatique avec le numero de telephone,
-     * pas d'inscription au prealable" -> si le numero n'existe pas encore,
-     * un compte client est cree automatiquement.
+     * Traite la tentative de connexion (avec inscription automatique)
      */
     public function login()
     {
@@ -27,7 +24,7 @@ class UserController extends BaseController
         $userModel    = new UserModel();
         $prefixeModel = new PrefixeModel();
 
-        // Recuperation securisee du champ "phone" envoye en POST
+        // Récupération sécurisée du champ "phone" envoyé en POST
         $numeroSaisi = $this->request->getPost('phone');
 
         if (empty($numeroSaisi)) {
@@ -35,6 +32,7 @@ class UserController extends BaseController
             return redirect()->to('/login');
         }
 
+        // Nettoyage complet du numéro (uniquement des chiffres)
         $cleanNumber = preg_replace('/[^0-9]/', '', $numeroSaisi);
 
         if (strlen($cleanNumber) < 4) {
@@ -42,40 +40,62 @@ class UserController extends BaseController
             return redirect()->to('/login');
         }
 
+<<<<<<< HEAD
         // 1. EXTRACTION ET VÉRIFICATION DU PRÉFIXE (ex: "034", "032")
         $prefixeSaisi = substr($cleanNumber, 0, 3);
 
         // On cherche si ce préfixe existe dans la table 'prefixe'
+=======
+        // 1. EXTRACTION ET VÉRIFICATION DU PRÉFIXE (ex: 034, 032, etc.)
+        $prefixeSaisi = substr($cleanNumber, 0, 3);
+>>>>>>> c29938e (ok)
         $prefixeExiste = $prefixeModel->where('nom', $prefixeSaisi)->first();
 
         if (!$prefixeExiste) {
             $session->setFlashdata('error', "Le préfixe '{$prefixeSaisi}' n'est pas pris en charge par notre réseau Mobile Money.");
+<<<<<<< HEAD
             return redirect()->to('/login');
         }
 
         // 2. RÉCUPÉRATION OU CRÉATION AUTOMATIQUE DU COMPTE
         // Utilisation de $userModel (et non $model) pour corriger l'erreur critique
+=======
+            return redirect()->to('/login'); // Redirection vers la bonne route
+        }
+
+        // 2. RÉCUPÉRATION OU CRÉATION DU COMPTE CLIENT
+        // Correction ici : on utilise le bon modèle $userModel et la variable nettoyée
+>>>>>>> c29938e (ok)
         $user = $userModel->getOrCreateUserByPhoneNumber($cleanNumber);
 
         if ($user) {
-            // Connexion reussie : on stocke les infos de l'utilisateur dans la session
+            // Connexion réussie : stockage dans la session de l'application
             $session->set([
                 'id_user'    => $user['id_user'],
                 'nom'        => $user['nom'] ?? 'Client', // Sécurité au cas où le nom est vide à la création
                 'isLoggedIn' => true,
             ]);
 
+<<<<<<< HEAD
             // Redirection vers le tableau de bord
             return redirect()->to('/client/voirsolde');
         }
 
         // Echec de sécurité
         $session->setFlashdata('error', 'Impossible de charger ou de créer votre compte.');
+=======
+            // Redirection vers le solde du client
+            return redirect()->to('/client/voirsolde');
+        }
+
+        // Échec de sécurité générique
+        $session->setFlashdata('error', 'Impossible de valider votre numéro de téléphone.');
+>>>>>>> c29938e (ok)
         return redirect()->to('/login');
     }
 
     /**
-     * Deconnexion
+     * Déconnexion
      */
     public function logout()
     {
