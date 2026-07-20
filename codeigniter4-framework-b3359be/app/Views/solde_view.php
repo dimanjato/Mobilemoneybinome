@@ -5,15 +5,24 @@
     <title>Mon Solde</title>
 </head>
 <body>
+<?= $this->include('partials/nav') ?>
+<div class="mm-container">
     <h1>Mon Compte</h1>
-    
+
+    <?php if (session()->getFlashdata('success')): ?>
+        <div class="mm-flash-success"><?= session()->getFlashdata('success') ?></div>
+    <?php endif; ?>
+    <?php if (session()->getFlashdata('error')): ?>
+        <div class="mm-flash-error"><?= session()->getFlashdata('error') ?></div>
+    <?php endif; ?>
+
     <div class="balance-card">
         <h3>Solde Actuel :</h3>
-        <!-- Affichage du solde formaté en Ariary (Ar) -->
-        <p style="font-size: 24px; font-weight: bold;">
+        <p style="font-size: 28px; font-weight: bold; color:#0b5ed7;">
             <?= number_format($soldeData['solde'], 2, ',', ' ') ?> Ar
         </p>
-        <small>Dernière mise à jour : <?= $soldeData['date'] ?? 'Aucune transaction' ?></small>
+        <small>Derniere mise a jour : <?= $soldeData['date'] ?? 'Aucune transaction' ?></small>
     </div>
+</div>
 </body>
 </html>

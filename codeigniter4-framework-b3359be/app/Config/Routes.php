@@ -8,10 +8,15 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->group('/client', ['filter' => 'auth'], function($routes) {
 $routes->get('/voirsolde','SoldController::actuel');
+$routes->get('/depot','TransactionController::depot');
+$routes->post('/depot','TransactionController::depot');
+$routes->get('/retrait','TransactionController::retrait');
+$routes->post('/retrait','TransactionController::retrait');
+$routes->get('/transfert','TransactionController::transfert');
+$routes->post('/transfert','TransactionController::transfert');
+$routes->get('/historique','TransactionController::historique');
 });
-$routes->get('/etudiants', 'EtudiantController::lister');
 $routes->get('/login', 'UserController::index');
 $routes->post('/login', 'UserController::login');
 $routes->get('/logout', 'UserController::logout');
-$routes->get('/dashboard', 'DashboardController::index'); // Crée cette page pour ton accueil
 

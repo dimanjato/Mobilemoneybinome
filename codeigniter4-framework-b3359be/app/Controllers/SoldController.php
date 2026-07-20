@@ -37,7 +37,9 @@ class SoldController extends BaseController
         $soldeObjet = SoldeModel::getSoldeAu((int)$id_user, $dateAujourdhui);
 
         // 4. Préparation des données pour la vue
-        $data['soldeData'] = $soldeObjet;
+        // (SoldeModel est un objet simple, pas un tableau : on le convertit
+        // pour pouvoir l'utiliser avec $soldeData['solde'] dans la vue)
+        $data['soldeData'] = $soldeObjet->toArray();
 
         // 5. Retour de la vue avec les données du solde
         return view('solde_view', $data);
