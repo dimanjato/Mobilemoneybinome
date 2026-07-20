@@ -57,6 +57,19 @@ class UserController extends BaseController
             return redirect()->to('/Connexion');
         }
 
+        // 1. EXTRACTION ET VÉRIFICATION DU PRÉFIXE
+        // On prend les 3 premiers caractères du numéro (ex: "034" depuis "0341234567")
+        $prefixeSaisi = substr($numeroSaisi, 0, 3);
+
+        // On cherche si ce préfixe existe dans la table 'prefixe'
+        $prefixeExiste = $prefixeModel->where('nom', $prefixeSaisi)->first();
+
+        if (!$prefixeExiste) {
+            // Si le préfixe n'est pas trouvé dans la base
+            $session->setFlashdata('error', "Le préfixe '{$prefixeSaisi}' n'est pas pris en charge par notre réseau Mobile Money.");
+            return redirect()->to('/Connexion');
+        }
+
         // 2. VÉRIFICATION DE L'UTILISATEUR
         // Si le préfixe est valide, on cherche l'utilisateur complet
         $user = $userModel->getUserByPhoneNumber($numeroSaisi);
