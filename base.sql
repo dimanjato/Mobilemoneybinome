@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS solde_user (
 );
 
 -- 5. Table : transaction
-CREATE TABLE IF NOT EXISTS transaction (
+CREATE TABLE IF NOT EXISTS transactions (
     id_transaction INTEGER PRIMARY KEY AUTOINCREMENT,
     id_type INTEGER,
     montant REAL NOT NULL,
@@ -45,3 +45,8 @@ CREATE TABLE IF NOT EXISTS transaction (
     FOREIGN KEY (id2) REFERENCES user(id_user),
     FOREIGN KEY (idMontant_frai) REFERENCES Montant_frai(idMontantFrai)
 );
+
+CREATE  TABLE IF NOT EXISTS prefixe (
+    id_prefixe INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL
+)
