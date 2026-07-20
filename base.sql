@@ -20,7 +20,8 @@ CREATE TABLE IF NOT EXISTS Montant_frai (
     Montant1 REAL NOT NULL,
     Montant2 REAL NOT NULL,
     frai REAL NOT NULL,
-    idtype_transaction INTEGER NOT NULL
+    idtype_transaction INTEGER NOT NULL,
+    FOREIGN KEY (idtype_transaction) REFERENCES type_transaction(id)
 );
 
 -- 5. Table : transaction
