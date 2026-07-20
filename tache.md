@@ -7,4 +7,13 @@
     - Montant_frai (idMontantFrai, Montant1, Montant2, frai)
 ## mise en place de donnee test :
     
+## Connexion base :
+## mise en place de donnee test :
+## Connexion de clients :
+    - validation :
+    - recherche de compte si existe :
+    - mampiditra session client :
+## voir le solde : 
+    - calul de solde dans table : transactions, et solde_user
+    - 
 ## 

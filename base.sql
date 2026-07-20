@@ -50,3 +50,21 @@ CREATE  TABLE IF NOT EXISTS prefixe (
     id_prefixe INTEGER PRIMARY KEY AUTOINCREMENT,
     nom TEXT NOT NULL
 )
+
+-- 1. Insertions dans la table type_transaction
+INSERT INTO type_transaction (nom) VALUES ('retrait');
+INSERT INTO type_transaction (nom) VALUES ('depot');
+INSERT INTO type_transaction (nom) VALUES ('transfert');
+
+-- 2. Insertions dans la table Montant_frai (basées sur l'image fournie)
+-- Colonnes : Montant1 (Borne minimale), Montant2 (Borne maximale), frai (Montant du frais)
+INSERT INTO Montant_frai (Montant1, Montant2, frai) VALUES (100, 1000, 50);
+INSERT INTO Montant_frai (Montant1, Montant2, frai) VALUES (1001, 5000, 50);
+INSERT INTO Montant_frai (Montant1, Montant2, frai) VALUES (5001, 10000, 100);
+INSERT INTO Montant_frai (Montant1, Montant2, frai) VALUES (10001, 25000, 200);
+INSERT INTO Montant_frai (Montant1, Montant2, frai) VALUES (25001, 50000, 400);
+INSERT INTO Montant_frai (Montant1, Montant2, frai) VALUES (50001, 100000, 800);
+INSERT INTO Montant_frai (Montant1, Montant2, frai) VALUES (100001, 250000, 1500);
+INSERT INTO Montant_frai (Montant1, Montant2, frai) VALUES (25001, 500000, 1500);
+INSERT INTO Montant_frai (Montant1, Montant2, frai) VALUES (500001, 1000000, 2500);
+INSERT INTO Montant_frai (Montant1, Montant2, frai) VALUES (1000001, 2000000, 3000);
