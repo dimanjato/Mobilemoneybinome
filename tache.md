@@ -13,6 +13,12 @@
     - mampiditra session client :
 ## voir le solde : 
     - calul de solde dans table : transactions, et solde_user
+    -
+
+## BASE URL : 
+
+## ETU004067 :
+### Voir solde : 
+    - prise session :
     - 
-## 
 

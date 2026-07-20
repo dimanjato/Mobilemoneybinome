@@ -68,3 +68,6 @@ INSERT INTO Montant_frai (Montant1, Montant2, frai) VALUES (100001, 250000, 1500
 INSERT INTO Montant_frai (Montant1, Montant2, frai) VALUES (25001, 500000, 1500);
 INSERT INTO Montant_frai (Montant1, Montant2, frai) VALUES (500001, 1000000, 2500);
 INSERT INTO Montant_frai (Montant1, Montant2, frai) VALUES (1000001, 2000000, 3000);
+
+
+/*view qui va cacluler solde present dans transaction*/

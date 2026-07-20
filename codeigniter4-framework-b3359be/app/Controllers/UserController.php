@@ -9,6 +9,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 class SoldeController extends BaseController
 {
     protected $soldeModel;
+    protected $session;
 
     public function initController(\CodeIgniter\HTTP\RequestInterface $request, \CodeIgniter\HTTP\ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
     {
@@ -16,25 +17,28 @@ class SoldeController extends BaseController
         
         // Initialisation du modèle pour l'avoir à disposition dans toutes les méthodes
         $this->soldeModel = new SoldeUserModel();
+        $this->session = \Config\Services::session();
     }
 
     /**
      * API : Récupère le solde actuel d'un utilisateur
      * Exemple URL : /solde/actuel/1
      */
-    public function actuel(int $id_user): ResponseInterface
+    public function actuel()
     {
-        $soldeActuel = $this->soldeModel->getSoldeActuel($id_user);
+        // Récupération de l'id_user stocké dans la session
+        $id_user = $this->session->get('id_user');
+        
+        $soldeActuel = $this->soldeModel->getSoldeActuel($id_user) ?? [
+        'id_user' => $id_user,
+        'solde'   => 0.0
+        ];
 
-        if (!$soldeActuel) {
-            return $this->response->setJSON([
-                'id_user' => $id_user,
-                'solde'   => 0.0,
-                'message' => 'Aucun solde enregistré pour cet utilisateur.'
-            ])->setStatusCode(200);
-        }
+        // On passe les données à un tableau
+        $data['soldeData'] = $soldeActuel;
 
-        return $this->response->setJSON($soldeActuel)->setStatusCode(200);
+        // On charge la vue en lui passant le tableau $data
+        return view('solde_view', $data);
     }
 
     /**
