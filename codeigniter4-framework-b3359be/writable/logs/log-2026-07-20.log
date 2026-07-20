@@ -1,0 +1,1018 @@
+CRITICAL - 2026-07-20 04:33:02 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('login.php')
+ 2 SYSTEMPATH\Common.php(1250): CodeIgniter\View\View->render('login', [], true)
+ 3 APPPATH\Controllers\UserController.php(14): view('login')
+ 4 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 6 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+CRITICAL - 2026-07-20 04:35:41 --> CodeIgniter\Exceptions\BadMethodCallException: Call to undefined method App\Models\UserModel::loginWithPhone
+[Method: POST, Route: login]
+in SYSTEMPATH\Model.php on line 761.
+ 1 APPPATH\Controllers\UserController.php(34): CodeIgniter\Model->__call('loginWithPhone', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+ERROR - 2026-07-20 04:37:23 --> Unable to prepare statement: 1, no such table: user
+in SYSTEMPATH\Database\SQLite3\Connection.php on line 164.
+ 1 SYSTEMPATH\Database\SQLite3\Connection.php(164): SQLite3->query('SELECT *
+FROM `user`
+WHERE `prefixe` = \'038\'
+AND `suffixe` = \'9631026\'
+ LIMIT 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute('SELECT *
+FROM `user`
+WHERE `prefixe` = \'038\'
+AND `suffixe` = \'9631026\'
+ LIMIT 1')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `user`
+WHERE `prefixe` = \'038\'
+AND `suffixe` = \'9631026\'
+ LIMIT 1')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `suffixe` = :suffixe:
+ LIMIT 1', [...], false)
+ 5 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 7 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 8 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0389631026')
+ 9 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+10 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+11 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+CRITICAL - 2026-07-20 04:37:23 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: 1, no such table: user
+[Method: POST, Route: login]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `suffixe` = :suffixe:
+ LIMIT 1', [...], false)
+ 2 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 4 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 5 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0389631026')
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+CRITICAL - 2026-07-20 04:37:23 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: 1, no such table: user
+in SYSTEMPATH\Database\SQLite3\Connection.php on line 174.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute('SELECT *
+FROM `user`
+WHERE `prefixe` = \'038\'
+AND `suffixe` = \'9631026\'
+ LIMIT 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `user`
+WHERE `prefixe` = \'038\'
+AND `suffixe` = \'9631026\'
+ LIMIT 1')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `suffixe` = :suffixe:
+ LIMIT 1', [...], false)
+ 4 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 6 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 7 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0389631026')
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+CRITICAL - 2026-07-20 04:37:23 --> [Caused by] Exception: Unable to prepare statement: 1, no such table: user
+in SYSTEMPATH\Database\SQLite3\Connection.php on line 164.
+ 1 SYSTEMPATH\Database\SQLite3\Connection.php(164): SQLite3->query('SELECT *
+FROM `user`
+WHERE `prefixe` = \'038\'
+AND `suffixe` = \'9631026\'
+ LIMIT 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute('SELECT *
+FROM `user`
+WHERE `prefixe` = \'038\'
+AND `suffixe` = \'9631026\'
+ LIMIT 1')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `user`
+WHERE `prefixe` = \'038\'
+AND `suffixe` = \'9631026\'
+ LIMIT 1')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `suffixe` = :suffixe:
+ LIMIT 1', [...], false)
+ 5 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 7 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 8 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0389631026')
+ 9 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+10 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+11 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+ERROR - 2026-07-20 04:43:37 --> Unable to prepare statement: 1, no such table: user
+in SYSTEMPATH\Database\SQLite3\Connection.php on line 164.
+ 1 SYSTEMPATH\Database\SQLite3\Connection.php(164): SQLite3->query('SELECT *
+FROM `user`
+WHERE `prefixe` = \'034\'
+AND `sufixe` = \'6895623\'
+ LIMIT 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute('SELECT *
+FROM `user`
+WHERE `prefixe` = \'034\'
+AND `sufixe` = \'6895623\'
+ LIMIT 1')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `user`
+WHERE `prefixe` = \'034\'
+AND `sufixe` = \'6895623\'
+ LIMIT 1')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `sufixe` = :sufixe:
+ LIMIT 1', [...], false)
+ 5 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 7 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 8 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0346895623')
+ 9 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+10 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+11 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+CRITICAL - 2026-07-20 04:43:37 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: 1, no such table: user
+[Method: POST, Route: login]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `sufixe` = :sufixe:
+ LIMIT 1', [...], false)
+ 2 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 4 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 5 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0346895623')
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+CRITICAL - 2026-07-20 04:43:37 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: 1, no such table: user
+in SYSTEMPATH\Database\SQLite3\Connection.php on line 174.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute('SELECT *
+FROM `user`
+WHERE `prefixe` = \'034\'
+AND `sufixe` = \'6895623\'
+ LIMIT 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `user`
+WHERE `prefixe` = \'034\'
+AND `sufixe` = \'6895623\'
+ LIMIT 1')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `sufixe` = :sufixe:
+ LIMIT 1', [...], false)
+ 4 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 6 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 7 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0346895623')
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+CRITICAL - 2026-07-20 04:43:37 --> [Caused by] Exception: Unable to prepare statement: 1, no such table: user
+in SYSTEMPATH\Database\SQLite3\Connection.php on line 164.
+ 1 SYSTEMPATH\Database\SQLite3\Connection.php(164): SQLite3->query('SELECT *
+FROM `user`
+WHERE `prefixe` = \'034\'
+AND `sufixe` = \'6895623\'
+ LIMIT 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute('SELECT *
+FROM `user`
+WHERE `prefixe` = \'034\'
+AND `sufixe` = \'6895623\'
+ LIMIT 1')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `user`
+WHERE `prefixe` = \'034\'
+AND `sufixe` = \'6895623\'
+ LIMIT 1')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `sufixe` = :sufixe:
+ LIMIT 1', [...], false)
+ 5 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 7 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 8 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0346895623')
+ 9 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+10 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+11 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+ERROR - 2026-07-20 04:48:02 --> Error connecting to the database: Exception: Unable to open database: unable to open database file in D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Database\SQLite3\Connection.php:111
+Stack trace:
+#0 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Database\SQLite3\Connection.php(111): SQLite3->__construct('D:\\s4\\Exam\\Mobi...')
+#1 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Database\BaseConnection.php(555): CodeIgniter\Database\SQLite3\Connection->connect(false)
+#2 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Database\SQLite3\Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+#3 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Database\BaseConnection.php(795): CodeIgniter\Database\SQLite3\Connection->initialize()
+#4 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#5 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+#6 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#7 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\app\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+#8 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\app\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0396835612')
+#9 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\CodeIgniter.php(951): App\Controllers\UserController->login()
+#10 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#11 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Boot.php(417): CodeIgniter\CodeIgniter->run()
+#13 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobi...')
+#16 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: SQLite3 error: Unable to open database: unable to open database file in D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Database\SQLite3\Connection.php:118
+Stack trace:
+#0 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Database\BaseConnection.php(555): CodeIgniter\Database\SQLite3\Connection->connect(false)
+#1 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Database\SQLite3\Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+#2 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Database\BaseConnection.php(795): CodeIgniter\Database\SQLite3\Connection->initialize()
+#3 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#6 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\app\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+#7 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\app\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0396835612')
+#8 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\CodeIgniter.php(951): App\Controllers\UserController->login()
+#9 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#10 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Boot.php(417): CodeIgniter\CodeIgniter->run()
+#12 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobi...')
+#15 {main}
+CRITICAL - 2026-07-20 04:48:02 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [SQLite3]: SQLite3 error: Unable to open database: unable to open database file
+[Method: POST, Route: login]
+in SYSTEMPATH\Database\BaseConnection.php on line 606.
+ 1 SYSTEMPATH\Database\SQLite3\Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseConnection.php(795): CodeIgniter\Database\SQLite3\Connection->initialize()
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `sufixe` = :sufixe:
+ LIMIT 1', [...], false)
+ 4 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 6 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 7 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0396835612')
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+CRITICAL - 2026-07-20 04:50:35 --> ParseError: syntax error, unexpected single-quoted string "DBDebug", expecting "]"
+[Method: GET, Route: login]
+in APPPATH\Config\Database.php on line 63.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(295): CodeIgniter\Autoloader\Autoloader->includeFile('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\app\\Config\\Database.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(271): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Config\\Database')
+ 3 SYSTEMPATH\Debug\Toolbar\Collectors\Database.php(255): CodeIgniter\Autoloader\Autoloader->loadClass('Config\\Database')
+ 4 SYSTEMPATH\Debug\Toolbar\Collectors\Database.php(75): CodeIgniter\Debug\Toolbar\Collectors\Database->getConnections()
+ 5 SYSTEMPATH\Debug\Toolbar.php(67): CodeIgniter\Debug\Toolbar\Collectors\Database->__construct()
+ 6 SYSTEMPATH\Config\Services.php(805): CodeIgniter\Debug\Toolbar->__construct(Object(Config\Toolbar))
+ 7 SYSTEMPATH\Config\BaseService.php(325): CodeIgniter\Config\Services::toolbar(Object(Config\Toolbar), false)
+ 8 SYSTEMPATH\Config\BaseService.php(264): CodeIgniter\Config\BaseService::__callStatic('toolbar', [...])
+ 9 SYSTEMPATH\Config\Services.php(800): CodeIgniter\Config\BaseService::getSharedInstance('toolbar', null)
+10 SYSTEMPATH\Config\BaseService.php(334): CodeIgniter\Config\Services::toolbar()
+11 SYSTEMPATH\Config\BaseService.php(203): CodeIgniter\Config\BaseService::__callStatic('toolbar', [])
+12 SYSTEMPATH\Common.php(1078): CodeIgniter\Config\BaseService::get('toolbar')
+13 SYSTEMPATH\Filters\DebugToolbar.php(44): service('toolbar')
+14 SYSTEMPATH\Filters\Filters.php(278): CodeIgniter\Filters\DebugToolbar->after(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), null)
+15 SYSTEMPATH\Filters\Filters.php(364): CodeIgniter\Filters\Filters->runAfter([...])
+16 SYSTEMPATH\CodeIgniter.php(393): CodeIgniter\Filters\Filters->runRequired('after')
+17 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->runRequiredAfterFilters(Object(CodeIgniter\Filters\Filters))
+18 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+19 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+20 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+21 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+CRITICAL - 2026-07-20 04:50:38 --> ParseError: syntax error, unexpected single-quoted string "DBDebug", expecting "]"
+[Method: GET, Route: login]
+in APPPATH\Config\Database.php on line 63.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(295): CodeIgniter\Autoloader\Autoloader->includeFile('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\app\\Config\\Database.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(271): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Config\\Database')
+ 3 SYSTEMPATH\Debug\Toolbar\Collectors\Database.php(255): CodeIgniter\Autoloader\Autoloader->loadClass('Config\\Database')
+ 4 SYSTEMPATH\Debug\Toolbar\Collectors\Database.php(75): CodeIgniter\Debug\Toolbar\Collectors\Database->getConnections()
+ 5 SYSTEMPATH\Debug\Toolbar.php(67): CodeIgniter\Debug\Toolbar\Collectors\Database->__construct()
+ 6 SYSTEMPATH\Config\Services.php(805): CodeIgniter\Debug\Toolbar->__construct(Object(Config\Toolbar))
+ 7 SYSTEMPATH\Config\BaseService.php(325): CodeIgniter\Config\Services::toolbar(Object(Config\Toolbar), false)
+ 8 SYSTEMPATH\Config\BaseService.php(264): CodeIgniter\Config\BaseService::__callStatic('toolbar', [...])
+ 9 SYSTEMPATH\Config\Services.php(800): CodeIgniter\Config\BaseService::getSharedInstance('toolbar', null)
+10 SYSTEMPATH\Config\BaseService.php(334): CodeIgniter\Config\Services::toolbar()
+11 SYSTEMPATH\Config\BaseService.php(203): CodeIgniter\Config\BaseService::__callStatic('toolbar', [])
+12 SYSTEMPATH\Common.php(1078): CodeIgniter\Config\BaseService::get('toolbar')
+13 SYSTEMPATH\Filters\DebugToolbar.php(44): service('toolbar')
+14 SYSTEMPATH\Filters\Filters.php(278): CodeIgniter\Filters\DebugToolbar->after(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), null)
+15 SYSTEMPATH\Filters\Filters.php(364): CodeIgniter\Filters\Filters->runAfter([...])
+16 SYSTEMPATH\CodeIgniter.php(393): CodeIgniter\Filters\Filters->runRequired('after')
+17 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->runRequiredAfterFilters(Object(CodeIgniter\Filters\Filters))
+18 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+19 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+20 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+21 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+CRITICAL - 2026-07-20 04:51:19 --> ParseError: syntax error, unexpected single-quoted string "DBDebug", expecting "]"
+[Method: GET, Route: login]
+in APPPATH\Config\Database.php on line 63.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(295): CodeIgniter\Autoloader\Autoloader->includeFile('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\app\\Config\\Database.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(271): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Config\\Database')
+ 3 SYSTEMPATH\Debug\Toolbar\Collectors\Database.php(255): CodeIgniter\Autoloader\Autoloader->loadClass('Config\\Database')
+ 4 SYSTEMPATH\Debug\Toolbar\Collectors\Database.php(75): CodeIgniter\Debug\Toolbar\Collectors\Database->getConnections()
+ 5 SYSTEMPATH\Debug\Toolbar.php(67): CodeIgniter\Debug\Toolbar\Collectors\Database->__construct()
+ 6 SYSTEMPATH\Config\Services.php(805): CodeIgniter\Debug\Toolbar->__construct(Object(Config\Toolbar))
+ 7 SYSTEMPATH\Config\BaseService.php(325): CodeIgniter\Config\Services::toolbar(Object(Config\Toolbar), false)
+ 8 SYSTEMPATH\Config\BaseService.php(264): CodeIgniter\Config\BaseService::__callStatic('toolbar', [...])
+ 9 SYSTEMPATH\Config\Services.php(800): CodeIgniter\Config\BaseService::getSharedInstance('toolbar', null)
+10 SYSTEMPATH\Config\BaseService.php(334): CodeIgniter\Config\Services::toolbar()
+11 SYSTEMPATH\Config\BaseService.php(203): CodeIgniter\Config\BaseService::__callStatic('toolbar', [])
+12 SYSTEMPATH\Common.php(1078): CodeIgniter\Config\BaseService::get('toolbar')
+13 SYSTEMPATH\Filters\DebugToolbar.php(44): service('toolbar')
+14 SYSTEMPATH\Filters\Filters.php(278): CodeIgniter\Filters\DebugToolbar->after(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), null)
+15 SYSTEMPATH\Filters\Filters.php(364): CodeIgniter\Filters\Filters->runAfter([...])
+16 SYSTEMPATH\CodeIgniter.php(393): CodeIgniter\Filters\Filters->runRequired('after')
+17 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->runRequiredAfterFilters(Object(CodeIgniter\Filters\Filters))
+18 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+19 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+20 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+21 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+ERROR - 2026-07-20 04:53:20 --> Unable to prepare statement: 1, no such table: user
+in SYSTEMPATH\Database\SQLite3\Connection.php on line 164.
+ 1 SYSTEMPATH\Database\SQLite3\Connection.php(164): SQLite3->query('SELECT *
+FROM `user`
+WHERE `prefixe` = \'039\'
+AND `sufixe` = \'5678112\'
+ LIMIT 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute('SELECT *
+FROM `user`
+WHERE `prefixe` = \'039\'
+AND `sufixe` = \'5678112\'
+ LIMIT 1')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `user`
+WHERE `prefixe` = \'039\'
+AND `sufixe` = \'5678112\'
+ LIMIT 1')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `sufixe` = :sufixe:
+ LIMIT 1', [...], false)
+ 5 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 7 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 8 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0395678112')
+ 9 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+10 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+11 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+CRITICAL - 2026-07-20 04:53:20 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: 1, no such table: user
+[Method: POST, Route: login]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `sufixe` = :sufixe:
+ LIMIT 1', [...], false)
+ 2 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 4 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 5 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0395678112')
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+CRITICAL - 2026-07-20 04:53:20 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: 1, no such table: user
+in SYSTEMPATH\Database\SQLite3\Connection.php on line 174.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute('SELECT *
+FROM `user`
+WHERE `prefixe` = \'039\'
+AND `sufixe` = \'5678112\'
+ LIMIT 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `user`
+WHERE `prefixe` = \'039\'
+AND `sufixe` = \'5678112\'
+ LIMIT 1')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `sufixe` = :sufixe:
+ LIMIT 1', [...], false)
+ 4 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 6 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 7 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0395678112')
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+CRITICAL - 2026-07-20 04:53:20 --> [Caused by] Exception: Unable to prepare statement: 1, no such table: user
+in SYSTEMPATH\Database\SQLite3\Connection.php on line 164.
+ 1 SYSTEMPATH\Database\SQLite3\Connection.php(164): SQLite3->query('SELECT *
+FROM `user`
+WHERE `prefixe` = \'039\'
+AND `sufixe` = \'5678112\'
+ LIMIT 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute('SELECT *
+FROM `user`
+WHERE `prefixe` = \'039\'
+AND `sufixe` = \'5678112\'
+ LIMIT 1')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `user`
+WHERE `prefixe` = \'039\'
+AND `sufixe` = \'5678112\'
+ LIMIT 1')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `sufixe` = :sufixe:
+ LIMIT 1', [...], false)
+ 5 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 7 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 8 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0395678112')
+ 9 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+10 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+11 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+ERROR - 2026-07-20 05:00:25 --> Unable to prepare statement: 1, no such table: user
+in SYSTEMPATH\Database\SQLite3\Connection.php on line 164.
+ 1 SYSTEMPATH\Database\SQLite3\Connection.php(164): SQLite3->query('SELECT *
+FROM `user`
+WHERE `prefixe` = \'038\'
+AND `sufixe` = \'9652212\'
+ LIMIT 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute('SELECT *
+FROM `user`
+WHERE `prefixe` = \'038\'
+AND `sufixe` = \'9652212\'
+ LIMIT 1')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `user`
+WHERE `prefixe` = \'038\'
+AND `sufixe` = \'9652212\'
+ LIMIT 1')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `sufixe` = :sufixe:
+ LIMIT 1', [...], false)
+ 5 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 7 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 8 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0389652212')
+ 9 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+10 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+11 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+CRITICAL - 2026-07-20 05:00:25 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: 1, no such table: user
+[Method: POST, Route: login]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `sufixe` = :sufixe:
+ LIMIT 1', [...], false)
+ 2 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 4 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 5 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0389652212')
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+CRITICAL - 2026-07-20 05:00:25 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: 1, no such table: user
+in SYSTEMPATH\Database\SQLite3\Connection.php on line 174.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute('SELECT *
+FROM `user`
+WHERE `prefixe` = \'038\'
+AND `sufixe` = \'9652212\'
+ LIMIT 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `user`
+WHERE `prefixe` = \'038\'
+AND `sufixe` = \'9652212\'
+ LIMIT 1')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `sufixe` = :sufixe:
+ LIMIT 1', [...], false)
+ 4 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 6 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 7 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0389652212')
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+CRITICAL - 2026-07-20 05:00:25 --> [Caused by] Exception: Unable to prepare statement: 1, no such table: user
+in SYSTEMPATH\Database\SQLite3\Connection.php on line 164.
+ 1 SYSTEMPATH\Database\SQLite3\Connection.php(164): SQLite3->query('SELECT *
+FROM `user`
+WHERE `prefixe` = \'038\'
+AND `sufixe` = \'9652212\'
+ LIMIT 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute('SELECT *
+FROM `user`
+WHERE `prefixe` = \'038\'
+AND `sufixe` = \'9652212\'
+ LIMIT 1')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `user`
+WHERE `prefixe` = \'038\'
+AND `sufixe` = \'9652212\'
+ LIMIT 1')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `sufixe` = :sufixe:
+ LIMIT 1', [...], false)
+ 5 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 7 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 8 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0389652212')
+ 9 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+10 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+11 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+ERROR - 2026-07-20 05:09:54 --> Error connecting to the database: Exception: Unable to open database: unable to open database file in D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Database\SQLite3\Connection.php:111
+Stack trace:
+#0 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Database\SQLite3\Connection.php(111): SQLite3->__construct('D:\\s4\\Exam\\Mobi...')
+#1 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Database\BaseConnection.php(555): CodeIgniter\Database\SQLite3\Connection->connect(false)
+#2 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Database\SQLite3\Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+#3 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Database\BaseConnection.php(795): CodeIgniter\Database\SQLite3\Connection->initialize()
+#4 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#5 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+#6 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#7 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\app\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+#8 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\app\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0389632564')
+#9 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\CodeIgniter.php(951): App\Controllers\UserController->login()
+#10 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#11 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Boot.php(417): CodeIgniter\CodeIgniter->run()
+#13 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobi...')
+#16 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: SQLite3 error: Unable to open database: unable to open database file in D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Database\SQLite3\Connection.php:118
+Stack trace:
+#0 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Database\BaseConnection.php(555): CodeIgniter\Database\SQLite3\Connection->connect(false)
+#1 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Database\SQLite3\Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+#2 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Database\BaseConnection.php(795): CodeIgniter\Database\SQLite3\Connection->initialize()
+#3 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#6 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\app\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+#7 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\app\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0389632564')
+#8 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\CodeIgniter.php(951): App\Controllers\UserController->login()
+#9 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+#10 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Boot.php(417): CodeIgniter\CodeIgniter->run()
+#12 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 D:\s4\Exam\Mobilemoneybinome\codeigniter4-framework-b3359be\system\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobi...')
+#15 {main}
+CRITICAL - 2026-07-20 05:09:54 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [SQLite3]: SQLite3 error: Unable to open database: unable to open database file
+[Method: POST, Route: login]
+in SYSTEMPATH\Database\BaseConnection.php on line 606.
+ 1 SYSTEMPATH\Database\SQLite3\Connection.php(74): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseConnection.php(795): CodeIgniter\Database\SQLite3\Connection->initialize()
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `sufixe` = :sufixe:
+ LIMIT 1', [...], false)
+ 4 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 6 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 7 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0389632564')
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+ERROR - 2026-07-20 05:14:41 --> Unable to prepare statement: 1, no such table: user
+in SYSTEMPATH\Database\SQLite3\Connection.php on line 164.
+ 1 SYSTEMPATH\Database\SQLite3\Connection.php(164): SQLite3->query('SELECT *
+FROM `user`
+WHERE `prefixe` = \'000\'
+AND `sufixe` = \'0000000\'
+ LIMIT 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute('SELECT *
+FROM `user`
+WHERE `prefixe` = \'000\'
+AND `sufixe` = \'0000000\'
+ LIMIT 1')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `user`
+WHERE `prefixe` = \'000\'
+AND `sufixe` = \'0000000\'
+ LIMIT 1')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `sufixe` = :sufixe:
+ LIMIT 1', [...], false)
+ 5 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 7 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 8 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0000000000')
+ 9 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+10 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+11 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+CRITICAL - 2026-07-20 05:14:41 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: 1, no such table: user
+[Method: POST, Route: login]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `sufixe` = :sufixe:
+ LIMIT 1', [...], false)
+ 2 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 4 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 5 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0000000000')
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+CRITICAL - 2026-07-20 05:14:41 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: 1, no such table: user
+in SYSTEMPATH\Database\SQLite3\Connection.php on line 174.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute('SELECT *
+FROM `user`
+WHERE `prefixe` = \'000\'
+AND `sufixe` = \'0000000\'
+ LIMIT 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `user`
+WHERE `prefixe` = \'000\'
+AND `sufixe` = \'0000000\'
+ LIMIT 1')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `sufixe` = :sufixe:
+ LIMIT 1', [...], false)
+ 4 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 6 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 7 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0000000000')
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+CRITICAL - 2026-07-20 05:14:41 --> [Caused by] Exception: Unable to prepare statement: 1, no such table: user
+in SYSTEMPATH\Database\SQLite3\Connection.php on line 164.
+ 1 SYSTEMPATH\Database\SQLite3\Connection.php(164): SQLite3->query('SELECT *
+FROM `user`
+WHERE `prefixe` = \'000\'
+AND `sufixe` = \'0000000\'
+ LIMIT 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute('SELECT *
+FROM `user`
+WHERE `prefixe` = \'000\'
+AND `sufixe` = \'0000000\'
+ LIMIT 1')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `user`
+WHERE `prefixe` = \'000\'
+AND `sufixe` = \'0000000\'
+ LIMIT 1')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `sufixe` = :sufixe:
+ LIMIT 1', [...], false)
+ 5 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 7 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 8 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0000000000')
+ 9 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+10 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+11 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+ERROR - 2026-07-20 05:32:31 --> Unable to prepare statement: 1, no such table: user
+in SYSTEMPATH\Database\SQLite3\Connection.php on line 164.
+ 1 SYSTEMPATH\Database\SQLite3\Connection.php(164): SQLite3->query('SELECT *
+FROM `user`
+WHERE `prefixe` = \'000\'
+AND `sufixe` = \'0000000\'
+ LIMIT 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute('SELECT *
+FROM `user`
+WHERE `prefixe` = \'000\'
+AND `sufixe` = \'0000000\'
+ LIMIT 1')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `user`
+WHERE `prefixe` = \'000\'
+AND `sufixe` = \'0000000\'
+ LIMIT 1')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `sufixe` = :sufixe:
+ LIMIT 1', [...], false)
+ 5 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 7 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 8 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0000000000')
+ 9 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+10 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+11 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+CRITICAL - 2026-07-20 05:32:31 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: 1, no such table: user
+[Method: POST, Route: login]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `sufixe` = :sufixe:
+ LIMIT 1', [...], false)
+ 2 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 4 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 5 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0000000000')
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+CRITICAL - 2026-07-20 05:32:31 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unable to prepare statement: 1, no such table: user
+in SYSTEMPATH\Database\SQLite3\Connection.php on line 174.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute('SELECT *
+FROM `user`
+WHERE `prefixe` = \'000\'
+AND `sufixe` = \'0000000\'
+ LIMIT 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `user`
+WHERE `prefixe` = \'000\'
+AND `sufixe` = \'0000000\'
+ LIMIT 1')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `sufixe` = :sufixe:
+ LIMIT 1', [...], false)
+ 4 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 6 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 7 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0000000000')
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+CRITICAL - 2026-07-20 05:32:31 --> [Caused by] Exception: Unable to prepare statement: 1, no such table: user
+in SYSTEMPATH\Database\SQLite3\Connection.php on line 164.
+ 1 SYSTEMPATH\Database\SQLite3\Connection.php(164): SQLite3->query('SELECT *
+FROM `user`
+WHERE `prefixe` = \'000\'
+AND `sufixe` = \'0000000\'
+ LIMIT 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute('SELECT *
+FROM `user`
+WHERE `prefixe` = \'000\'
+AND `sufixe` = \'0000000\'
+ LIMIT 1')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `user`
+WHERE `prefixe` = \'000\'
+AND `sufixe` = \'0000000\'
+ LIMIT 1')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `user`
+WHERE `prefixe` = :prefixe:
+AND `sufixe` = :sufixe:
+ LIMIT 1', [...], false)
+ 5 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 7 APPPATH\Models\UserModel.php(17): CodeIgniter\BaseModel->first()
+ 8 APPPATH\Controllers\UserController.php(34): App\Models\UserModel->getUserByPhoneNumber('0000000000')
+ 9 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\UserController->login()
+10 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserController))
+11 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('D:\\s4\\Exam\\Mobilemoneybinome\\codeigniter4-framework-b3359be\\public\\index.php')
+ERROR - 2026-07-20 05:42:10 --> Unable to prepare statement: 1, near "sqlite3": syntax error
+in SYSTEMPATH\Database\SQLite3\Connection.php on line 164.
+ 1 SYSTEMPATH\Database\SQLite3\Connection.php(164): SQLite3->query('sqlite3 mobilemoney.db
+-- 1. Table : user
+CREATE TABLE IF NOT EXISTS user (
+    id_user INTEGER PRIMARY KEY AUTOINCREMENT,
+    sufixe TEXT,
+    prefixe TEXT,
+    nom TEXT NOT NULL
+)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute('sqlite3 mobilemoney.db
+-- 1. Table : user
+CREATE TABLE IF NOT EXISTS user (
+    id_user INTEGER PRIMARY KEY AUTOINCREMENT,
+    sufixe TEXT,
+    prefixe TEXT,
+    nom TEXT NOT NULL
+)')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('sqlite3 mobilemoney.db
+-- 1. Table : user
+CREATE TABLE IF NOT EXISTS user (
+    id_user INTEGER PRIMARY KEY AUTOINCREMENT,
+    sufixe TEXT,
+    prefixe TEXT,
+    nom TEXT NOT NULL
+)')
+ 4 APPPATH\Database\Migrations\2026-07-20-052851_InitDatabase.php(25): CodeIgniter\Database\BaseConnection->query('sqlite3 mobilemoney.db
+-- 1. Table : user
+CREATE TABLE IF NOT EXISTS user (
+    id_user INTEGER PRIMARY KEY AUTOINCREMENT,
+    sufixe TEXT,
+    prefixe TEXT,
+    nom TEXT NOT NULL
+)')
+ 5 SYSTEMPATH\Database\MigrationRunner.php(1014): App\Database\Migrations\InitDatabase->up()
+ 6 SYSTEMPATH\Database\MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 7 SYSTEMPATH\Commands\Database\Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 8 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+ 9 SYSTEMPATH\Commands\Database\Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+10 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([])
+11 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate', [])
+12 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+13 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+14 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-07-20 05:43:18 --> Unable to prepare statement: 1, near "NO": syntax error
+in SYSTEMPATH\Database\SQLite3\Connection.php on line 164.
+ 1 SYSTEMPATH\Database\SQLite3\Connection.php(164): SQLite3->query('-- 2. Table : type_transaction
+CREATE TABLE IF NO
+T EXISTS type_transaction (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL
+)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute('-- 2. Table : type_transaction
+CREATE TABLE IF NO
+T EXISTS type_transaction (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL
+)')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('-- 2. Table : type_transaction
+CREATE TABLE IF NO
+T EXISTS type_transaction (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL
+)')
+ 4 APPPATH\Database\Migrations\2026-07-20-052851_InitDatabase.php(25): CodeIgniter\Database\BaseConnection->query('-- 2. Table : type_transaction
+CREATE TABLE IF NO
+T EXISTS type_transaction (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL
+)')
+ 5 SYSTEMPATH\Database\MigrationRunner.php(1014): App\Database\Migrations\InitDatabase->up()
+ 6 SYSTEMPATH\Database\MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 7 SYSTEMPATH\Commands\Database\Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 8 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+ 9 SYSTEMPATH\Commands\Database\Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+10 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([])
+11 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate', [])
+12 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+13 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+14 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-07-20 05:46:04 --> Unable to execute statement: not an error
+in SYSTEMPATH\Database\SQLite3\Connection.php on line 164.
+ 1 SYSTEMPATH\Database\SQLite3\Connection.php(164): SQLite3->query('-- --sqlite3 mobilemoney.db
+-- -- 1. Table : user
+-- CREATE TABLE IF NOT EXISTS user (
+--     id_user INTEGER PRIMARY KEY AUTOINCREMENT,
+--     sufixe TEXT,
+--     prefixe TEXT,
+--     nom TEXT NOT NULL
+-- )')
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\SQLite3\Connection->execute('-- --sqlite3 mobilemoney.db
+-- -- 1. Table : user
+-- CREATE TABLE IF NOT EXISTS user (
+--     id_user INTEGER PRIMARY KEY AUTOINCREMENT,
+--     sufixe TEXT,
+--     prefixe TEXT,
+--     nom TEXT NOT NULL
+-- )')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('-- --sqlite3 mobilemoney.db
+-- -- 1. Table : user
+-- CREATE TABLE IF NOT EXISTS user (
+--     id_user INTEGER PRIMARY KEY AUTOINCREMENT,
+--     sufixe TEXT,
+--     prefixe TEXT,
+--     nom TEXT NOT NULL
+-- )')
+ 4 APPPATH\Database\Migrations\2026-07-20-052851_InitDatabase.php(25): CodeIgniter\Database\BaseConnection->query('-- --sqlite3 mobilemoney.db
+-- -- 1. Table : user
+-- CREATE TABLE IF NOT EXISTS user (
+--     id_user INTEGER PRIMARY KEY AUTOINCREMENT,
+--     sufixe TEXT,
+--     prefixe TEXT,
+--     nom TEXT NOT NULL
+-- )')
+ 5 SYSTEMPATH\Database\MigrationRunner.php(1014): App\Database\Migrations\InitDatabase->up()
+ 6 SYSTEMPATH\Database\MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 7 SYSTEMPATH\Commands\Database\Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 8 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+ 9 SYSTEMPATH\Commands\Database\Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+10 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([])
+11 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate', [])
+12 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+13 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+14 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
