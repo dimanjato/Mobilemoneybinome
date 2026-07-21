@@ -16,18 +16,16 @@ class UserController extends BaseController
     }
 
     /**
-     * Traite la tentative de connexion.
-     * Conformement au sujet : "Login automatique avec le numero de telephone,
-     * pas d'inscription au prealable" -> si le numero n'existe pas encore,
-     * un compte client est cree automatiquement.
+     * Traite la tentative de connexion (avec inscription automatique)
      */
+    
     public function login()
     {
         $session      = session();
         $userModel    = new UserModel();
         $prefixeModel = new PrefixeModel();
 
-        // Recuperation securisee du champ "phone" envoye en POST
+        // Récupération sécurisée du champ "phone" envoyé en POST
         $numeroSaisi = $this->request->getPost('phone');
 
         if (empty($numeroSaisi)) {
@@ -35,6 +33,7 @@ class UserController extends BaseController
             return redirect()->to('/login');
         }
 
+        // Nettoyage complet du numéro (uniquement des chiffres)
         $cleanNumber = preg_replace('/[^0-9]/', '', $numeroSaisi);
 
         if (strlen($cleanNumber) < 4) {
@@ -58,7 +57,7 @@ class UserController extends BaseController
         $user = $userModel->getOrCreateUserByPhoneNumber($cleanNumber);
 
         if ($user) {
-            // Connexion reussie : on stocke les infos de l'utilisateur dans la session
+            // Connexion réussie : stockage dans la session de l'application
             $session->set([
                 'id_user'    => $user['id_user'],
                 'nom'        => $user['nom'] ?? 'Client', // Sécurité au cas où le nom est vide à la création
@@ -75,7 +74,7 @@ class UserController extends BaseController
     }
 
     /**
-     * Deconnexion
+     * Déconnexion
      */
     public function logout()
     {

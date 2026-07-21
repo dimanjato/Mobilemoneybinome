@@ -1,0 +1,7 @@
+codeigniter4-framework-b3359be/writable/debugbar/*
+codeigniter4-framework-b3359be/writable/logs/*
+codeigniter4-framework-b3359be/writable/session/*
+codeigniter4-framework-b3359be/writable/mobilemoney.db
+!codeigniter4-framework-b3359be/writable/debugbar/index.html
+!codeigniter4-framework-b3359be/writable/logs/index.html
+!codeigniter4-framework-b3359be/writable/session/index.html
