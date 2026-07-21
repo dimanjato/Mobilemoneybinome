@@ -87,102 +87,64 @@ class TransactionController extends BaseController
 
         return view('retrait_view', ['solde' => $this->soldeActuel($idUser)]);
     }
-/**
-     * Faire un transfert vers un ou plusieurs numeros.
-     * Meme montant envoye a chaque destinataire, meme date/heure.
-     *
-     * @param bool|null $inclureFrais Si true : les frais sont preleves sur le montant saisi
-     *                                (le montant total debite = montant saisi).
-     *                                Si false : les frais s'ajoutent au montant saisi
-     *                                (le montant total debite = montant + frais).
-     *                                Si null, la valeur est lue depuis le POST (checkbox).
+
+    /**
+     * Faire un transfert vers un autre numero.
+     * Si le destinataire n'a pas encore de compte, il est cree automatiquement
+     * (meme logique que la connexion : pas d'inscription prealable).
      */
-    public function transfert(?bool $inclureFrais = null)
+    public function transfert()
     {
         $idUser = $this->session->get('id_user');
 
         if ($this->request->getMethod() === 'POST') {
-            $montant      = (float) $this->request->getPost('montant');
-            $numeros      = (array) $this->request->getPost('numero');
-            $numeros      = array_values(array_filter(array_map('trim', $numeros), fn ($n) => $n !== ''));
-            $userModel    = new UserModel();
-            $montantModel = new MontantModel();
+            $montant       = (float) $this->request->getPost('montant');
+            $numeroDest    = (string) $this->request->getPost('numero');
+            $userModel     = new UserModel();
+            $montantModel  = new MontantModel();
 
-            // Si non fourni en argument, on lit la case a cocher du formulaire
-            if ($inclureFrais === null) {
-                $inclureFrais = (bool) $this->request->getPost('inclure_frais');
-            }
-
-            if ($montant <= 0 || empty($numeros)) {
-                $this->session->setFlashdata('error', 'Veuillez saisir un montant et au moins un numero valides.');
+            if ($montant <= 0 || empty($numeroDest)) {
+                $this->session->setFlashdata('error', 'Veuillez saisir un montant et un numero valides.');
                 return redirect()->to('/client/transfert');
             }
 
-            $tranche = $montantModel->getTranche($montant, 1);
+            $destinataire = $userModel->getOrCreateUserByPhoneNumber($numeroDest);
+
+            if (!$destinataire) {
+                $this->session->setFlashdata('error', 'Numero de destinataire invalide.');
+                return redirect()->to('/client/transfert');
+            }
+
+            if ((int) $destinataire['id_user'] === (int) $idUser) {
+                $this->session->setFlashdata('error', 'Vous ne pouvez pas vous transferer de l\'argent a vous-meme.');
+                return redirect()->to('/client/transfert');
+            }
+
+            $tranche = $montantModel->getTranche($montant, TransactionModel::TYPE_TRANSFERT);
             if (!$tranche) {
                 $this->session->setFlashdata('error', 'Aucun bareme de frais ne correspond a ce montant.');
                 return redirect()->to('/client/transfert');
             }
 
-            $frais = (float) $tranche['frai'];
-
-            // Coeur de la logique demandee :
-            // - inclureFrais actif  -> le montant saisi couvre deja les frais (montant inchange)
-            // - inclureFrais inactif -> les frais s'ajoutent par-dessus le montant saisi
-            if ($inclureFrais) {
-                $montant = $montant + $frais;
-            } else {
-                $montant = $montant;
-            }
-
-            $coutParTransfert = $montant;
-            $nombreTransferts = count($numeros);
-            $coutTotal        = $coutParTransfert * $nombreTransferts;
-
+            $frais       = (float) $tranche['frai'];
             $soldeActuel = $this->soldeActuel($idUser);
-            if ($soldeActuel < $coutTotal) {
-                $this->session->setFlashdata('error', 'Solde insuffisant pour effectuer ' . $nombreTransferts . ' transfert(s) (total requis : ' . number_format($coutTotal, 0, ',', ' ') . ' Ar).');
+
+            if ($soldeActuel < ($montant + $frais)) {
+                $this->session->setFlashdata('error', 'Solde insuffisant pour ce transfert (montant + frais de ' . number_format($frais, 0, ',', ' ') . ' Ar).');
                 return redirect()->to('/client/transfert');
             }
 
-            // On resout et valide TOUS les destinataires avant d'executer quoi que ce soit,
-            // pour eviter d'enregistrer une partie des transferts si un numero est invalide.
-            $destinataires = [];
-            foreach ($numeros as $numeroDest) {
-                $destinataire = $userModel->getOrCreateUserByPhoneNumber($numeroDest);
-
-                if (!$destinataire) {
-                    $this->session->setFlashdata('error', 'Numero de destinataire invalide : ' . $numeroDest);
-                    return redirect()->to('/client/transfert');
-                }
-
-                if ((int) $destinataire['id_user'] === (int) $idUser) {
-                    $this->session->setFlashdata('error', 'Vous ne pouvez pas vous transferer de l\'argent a vous-meme (' . $numeroDest . ').');
-                    return redirect()->to('/client/transfert');
-                }
-
-                $destinataires[] = $destinataire;
-            }
-
             $model = new TransactionModel();
-            $noms  = [];
+            $model->enregistrerTransfert($idUser, $destinataire['id_user'], $montant, $tranche['idMontantFrai']);
 
-            foreach ($destinataires as $destinataire) {
-                $model->enregistrerTransfert($idUser, $destinataire['id_user'], $montant, $tranche['idMontantFrai']);
-                $noms[] = $destinataire['prefixe'] . $destinataire['sufixe'];
-            }
-
-            $this->session->setFlashdata(
-                'success',
-                $nombreTransferts . ' transfert(s) de ' . number_format($montant, 0, ',', ' ') . ' Ar effectue(s) vers : '
-                . implode(', ', $noms) . ' (frais unitaire : ' . number_format($frais, 0, ',', ' ') . ' Ar' . ($inclureFrais ? ', inclus dans le montant' : ', ajoutes au montant') . ').'
-            );
+            $this->session->setFlashdata('success', 'Transfert de ' . number_format($montant, 0, ',', ' ') . ' Ar effectue vers ' . $destinataire['prefixe'] . $destinataire['sufixe'] . ' (frais : ' . number_format($frais, 0, ',', ' ') . ' Ar).');
             return redirect()->to('/client/voirsolde');
         }
 
         return view('transfert_view', ['solde' => $this->soldeActuel($idUser)]);
     }
-        /**
+
+    /**
      * Historique des operations de l'utilisateur connecte.
      */
     public function historique()
