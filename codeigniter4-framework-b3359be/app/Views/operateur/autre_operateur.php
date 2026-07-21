@@ -6,6 +6,11 @@
     <title>Gestion des Autres Opérateurs</title>
     <!-- Utilisation de Bootstrap 5 pour un rendu propre et rapide pour les examens -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url('assets/css/theme.css') ?>">
+    <!-- theme.js repeint les classes bg-primary/text-success/etc. avec la meme
+         palette que le reste de l'appli, pour que cette page ne jure plus -->
+    <script src="<?= base_url('assets/js/theme.js') ?>"></script>
+    <style>body { font-family: var(--mm-font); }</style>
 </head>
 <body class="bg-light p-4">
 
@@ -23,7 +28,7 @@
             <h1 class="h2 text-primary">Gestion des Opérateurs Tiers</h1>
             <!-- Indicateur de la Somme des Gains Globaux -->
             <div class="bg-success text-white p-3 rounded text-end">
-                <span class="d-block text-uppercase small font-weight-bold">Somme globale des gains</span>
+                <span class="d-block text-uppercase small fw-bold">Somme globale des gains</span>
                 <strong class="fs-4"><?= number_format($totalGains, 2, ',', ' ') ?> Ar</strong>
             </div>
         </div>
@@ -32,7 +37,7 @@
             <!-- 1. LISTE DES AUTRES OPERATEURS AVEC LEUR POURCENTAGE -->
             <div class="col-md-7">
                 <div class="card h-100">
-                    <div class="card-header bg-dark text-white font-weight-bold">
+                    <div class="card-header bg-dark text-white fw-bold">
                         Liste des autres opérateurs & commissions
                     </div>
                     <div class="card-body p-0">
@@ -69,25 +74,25 @@
             <!-- 2. FORMULAIRE NOUVEAU OPERATEUR -->
             <div class="col-md-5">
                 <div class="card h-100">
-                    <div class="card-header bg-primary text-white font-weight-bold">
+                    <div class="card-header bg-primary text-white fw-bold">
                         Ajouter un nouvel opérateur
                     </div>
                     <div class="card-body">
                         <form action="<?= base_url('operateur/add-tiers') ?>" method="POST">
                             <?= csrf_field() ?>
                             <div class="mb-3">
-                                <label for="nom" class="form-label font-weight-bold">Nom de l'opérateur</label>
+                                <label for="nom" class="form-label fw-bold">Nom de l'opérateur</label>
                                 <input type="text" class="form-control" id="nom" name="nom" placeholder="Ex: Airtel, Orange" required>
                             </div>
 
                             <div class="mb-3">
-                                <label for="prefixe" class="form-label font-weight-bold">Préfixe(s)</label>
+                                <label for="prefixe" class="form-label fw-bold">Préfixe(s)</label>
                                 <input type="text" class="form-control" id="prefixe" name="prefixe" placeholder="Ex: 033, 037 (séparés par une virgule)" required>
                                 <div class="form-text text-muted">S'il y en a plusieurs, sépare-les par des virgules sans espaces.</div>
                             </div>
 
                             <div class="mb-3">
-                                <label for="prct" class="form-label font-weight-bold">Pourcentage commission (%)</label>
+                                <label for="prct" class="form-label fw-bold">Pourcentage commission (%)</label>
                                 <div class="input-group">
                                     <input type="number" step="0.01" class="form-control" id="prct" name="prct" placeholder="Ex: 2.5" required>
                                     <span class="input-group-text">%</span>
@@ -103,7 +108,7 @@
 
         <!-- 3. LISTE DES HISTORIQUES ENVOYÉS À CHAQUE OPÉRATEUR AVEC FILTRES -->
         <div class="card mt-5 shadow-sm">
-            <div class="card-header bg-secondary text-white font-weight-bold">
+            <div class="card-header bg-secondary text-white fw-bold">
                 Historique des envois vers les opérateurs tiers
             </div>
             <div class="card-body">
@@ -111,7 +116,7 @@
                 <!-- Zone des formulaires de filtres (Filtre opérateur, préfixe et date) -->
                 <form action="<?= base_url('operateur/autre') ?>" method="GET" class="row g-3 mb-4 align-items-end">
                     <div class="col-md-3">
-                        <label for="filter_op" class="form-label small font-weight-bold text-muted">Filtrer par Opérateur</label>
+                        <label for="filter_op" class="form-label small fw-bold text-muted">Filtrer par Opérateur</label>
                         <select name="operateur" id="filter_op" class="form-select">
                             <option value="">Tous les opérateurs</option>
                             <?php foreach ($listeOperateursFiltrable as $lop): ?>
@@ -123,7 +128,7 @@
                     </div>
 
                     <div class="col-md-3">
-                        <label for="filter_pref" class="form-label small font-weight-bold text-muted">Filtrer par Préfixe</label>
+                        <label for="filter_pref" class="form-label small fw-bold text-muted">Filtrer par Préfixe</label>
                         <select name="prefixe" id="filter_pref" class="form-select">
                             <option value="">Tous les préfixes</option>
                             <?php foreach ($listePrefixesFiltrable as $lpref): ?>
@@ -135,7 +140,7 @@
                     </div>
 
                     <div class="col-md-3">
-                        <label for="filter_date" class="form-label small font-weight-bold text-muted">Filtrer par Date</label>
+                        <label for="filter_date" class="form-label small fw-bold text-muted">Filtrer par Date</label>
                         <input type="date" name="date" id="filter_date" class="form-control" value="<?= esc($filtres['date'] ?? '') ?>">
                     </div>
 

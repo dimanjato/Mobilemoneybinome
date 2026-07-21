@@ -18,7 +18,7 @@
 
     <div class="balance-card">
         <h3>Solde Actuel :</h3>
-        <p style="font-size: 28px; font-weight: bold; color:#0b5ed7;">
+        <p class="mm-balance">
             <?= number_format($soldeData['solde'], 2, ',', ' ') ?> Ar
         </p>
         <small>Derniere mise a jour : <?= $soldeData['date'] ?? 'Aucune transaction' ?></small>

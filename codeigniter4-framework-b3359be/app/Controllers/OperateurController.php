@@ -6,6 +6,8 @@ use App\Models\PrefixeModel;
 use App\Models\TypeTransactionModel;
 use App\Models\MontantFraiModel;
 use App\Models\OperateurModel;
+use App\Models\UserModel;
+use App\Models\SoldeModel;
 
 class OperateurController extends BaseController
 {
@@ -15,12 +17,39 @@ class OperateurController extends BaseController
         $prefixeModel = new PrefixeModel();
         $typeModel    = new TypeTransactionModel();
         $fraiModel    = new MontantFraiModel();
+        $userModel    = new UserModel();
 
         $data['prefixes']   = $prefixeModel->findAll();
         $data['operations'] = $typeModel->findAll();
         $data['frais']      = $fraiModel->getFraisAvecOperation();
 
-        // On va chercher le fichier dans app/Views/operateur/operateur_view.php.php
+        $db = \Config\Database::connect();
+
+        // Resume des frais reellement collectes, groupes par type d'operation
+        // (cette variable n'etait auparavant jamais transmise a la vue)
+        $data['resume_frais'] = $db->query("
+            SELECT
+                tt.nom AS operation_nom,
+                COUNT(t.id_transaction) AS nombre_transactions,
+                COALESCE(SUM(mf.frai), 0) AS total_frais
+            FROM transactions t
+            JOIN type_transaction tt ON tt.id = t.id_type
+            LEFT JOIN Montant_frai mf ON mf.idMontantFrai = t.idMontant_frai
+            GROUP BY t.id_type
+        ")->getResultArray();
+
+        // Liste des utilisateurs avec leur solde actuel (idem, jamais transmise avant)
+        $utilisateurs = $userModel->findAll();
+        $data['utilisateurs_soldes'] = array_map(function ($u) {
+            $solde = SoldeModel::getSoldeAu((int) $u['id_user'], date('Y-m-d H:i:s'));
+            return [
+                'id'           => $u['id_user'],
+                'nom'          => $u['nom'],
+                'telephone'    => $u['prefixe'] . $u['sufixe'],
+                'solde_actuel' => $solde->solde,
+            ];
+        }, $utilisateurs);
+
         return view('operateur/operateur_view.php', $data);
     }
 
